@@ -25,7 +25,7 @@ for file in files:
     result_error = grouped.sem()
 
     # Plot QPS vs average p95, with error bars for stddev (QPS and p95)
-    plt.errorbar(result_mean['QPS'], result_mean['p95'], xerr=result_error['QPS'], yerr=result_error['p95'], label=file)
+    plt.errorbar(result_mean['QPS'], result_mean['p95'], xerr=result_error['QPS'], yerr=result_error['p95'], label=file, linewidth=0.01)
 
 # labeling axes
 plt.xlabel('QPS')
