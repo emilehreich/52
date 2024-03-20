@@ -6,7 +6,7 @@ import glob
 files = glob.glob('*.txt')
 
 # create a new figure
-plt.figure(figsize=(12,9))
+plt.figure(figsize=(12, 9))
 
 # Define column headers
 headers = ['type', 'avg', 'std', 'min', 'p5', 'p10', 'p50', 'p67', 'p75', 'p80', 'p85', 'p90', 'p95', 'p99', 'p999', 'p9999', 'QPS', 'target']
@@ -15,15 +15,17 @@ headers = ['type', 'avg', 'std', 'min', 'p5', 'p10', 'p50', 'p67', 'p75', 'p80',
 for file in files:
     # Load data from file into a pandas DataFrame
     df = pd.read_csv(file, delim_whitespace=True, comment='#', names=headers)
-    
+
     # Convert p95 from microseconds to milliseconds
-    df['p95'] = df['p95']/1e3
-    
+    df['p95'] = df['p95'] / 1e3
+
     # Group the DataFrame by 'QPS' and compute the mean of 'p95'
-    grouped = df.groupby('QPS')['p95'].mean().reset_index()
-    
+    grouped = df.groupby('target')[['QPS', 'p95']]
+    result_mean = grouped.mean()
+    result_error = grouped.sem()
+
     # Plot QPS vs average p95, with error bars for stddev (QPS and p95)
-    plt.errorbar(grouped['QPS'], grouped['p95'], xerr=df['QPS'].std(), yerr=df['p95'].std(), label=file)
+    plt.errorbar(result_mean['QPS'], result_mean['p95'], xerr=result_error['QPS'], yerr=result_error['p95'], label=file)
 
 # labeling axes
 plt.xlabel('QPS')
