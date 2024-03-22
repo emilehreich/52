@@ -11,17 +11,19 @@ do
     do
         kubectl create -f interference/ibench-$IBENCH_EXP.yaml
 
-        sleep 20 # making sure interference has started.
+        sleep 5 # making sure interference has started.
 
         kubectl create -f parsec-benchmarks/part2a/parsec-$PARSEC_EXP.yaml
 
-        sleep 5 # just to be sure
+        sleep 60 # just to be sure that it is completed
 
-        echo $(kubectl logs $(kubectl get pods --selector=job-name=parsec-$PARSEC_EXP --output=jsonpath='{.items[*].metadata.name}')) > experiments/part2a/${PARSEC_EXP}_vs_${IBENCH_EXP}.txt
+        kubectl logs $(kubectl get pods --selector=job-name=parsec-$PARSEC_EXP --output=jsonpath='{.items[*].metadata.name}') > experiments/part2a/${PARSEC_EXP}_vs_${IBENCH_EXP}.txt
+        echo \n >> experiments/part2a/${PARSEC_EXP}_vs_${IBENCH_EXP}.txt
+        kubectl get jobs >> experiments/part2a/${PARSEC_EXP}_vs_${IBENCH_EXP}.txt
 
-        kubectl delete jobs parsec-$PARSEC_EXP
+        kubectl delete jobs --all
 
-        kubectl delete pods ibench-$IBENCH_EXP
+        kubectl delete pods --all
     done
 
     
