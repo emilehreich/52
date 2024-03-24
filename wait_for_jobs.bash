@@ -1,19 +1,19 @@
 #!/bin/bash
 
 # Function to get the number of incomplete jobs
-get_incomplete_jobs_count() {
-  kubectl get jobs | awk '/parsec-*/{print $2}'
+get_complete_jobs() {
+  kubectl get jobs | awk '/parsec-*/{split($2,a,"/"); print a[1]}'
 }
 
 # Main loop
 while true; do
   # Get the number of incomplete jobs
-  incomplete_jobs=$(get_incomplete_jobs_count)
+  complete=$(get_complete_jobs)
   
-  echo "Checking... there are ${incomplete_jobs} complete jobs."
+  echo "Checking... there are ${complete} complete jobs."
 
   # Break the loop if all jobs are complete
-  if [[ "${incomplete_jobs}" -eq "1/1" ]]; then
+  if [[ "${complete}" -eq "1" ]]; then
     echo "All jobs have completed."
     break
   fi
