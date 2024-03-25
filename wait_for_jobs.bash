@@ -10,11 +10,9 @@ while true; do
   # Get the number of incomplete jobs
   complete=$(get_complete_jobs)
   
-  echo "Checking... there are ${complete} complete jobs."
 
   # Break the loop if all jobs are complete
-  if [[ "${complete}" -eq "1" ]]; then
-    echo "All jobs have completed."
+  if [[ ${complete} -eq 1 ]]; then
     break
   fi
   
