@@ -27,19 +27,18 @@ for file in files:
     # Plot QPS vs average p95, with error bars for stddev (QPS and p95)
     plt.errorbar(result_mean['QPS'], result_mean['p95'], xerr=result_error['QPS'], yerr=result_error['p95'], label=file, linewidth=0.01)
 
+# Set the size of the text
+text_size = 16.5
+
 # labeling axes
-plt.xlabel('QPS')
-plt.ylabel('Average p95 (ms)')
+plt.xlabel('QPS', fontsize=text_size)
+plt.ylabel('Average p95 (ms)', fontsize=text_size)
 
 # Add legend
-plt.legend()
-
-# Set the limits of the axes
-plt.xlim(0, 55e3)
-plt.ylim(0, 8)
+plt.legend(fontsize=text_size)
 
 # Title for the plots
-plt.title('Average QPS vs p95 (ms)')
+plt.title('Average QPS vs p95 (ms)', fontsize=text_size)
 
 # Display the plot
 plt.savefig("exp.pdf")
