@@ -5,11 +5,12 @@ PARSEC_SERVER_ID=$(kubectl get nodes -o wide | grep parsec- | awk '{print substr
 
 kubectl label nodes parsec-server-$PARSEC_SERVER_ID cca-project-nodetype=parsec
 
+IBENCH_EXP = "no_ibench_intf"
 
 for PARSEC_EXP in dedup blackscholes canneal ferret freqmine radix vips
 do
-    if [ -f "experiments/part2a/${PARSEC_EXP}_vs_no_ibench_intf.txt" ]; then
-        echo "File experiments/part2a/${PARSEC_EXP}_vs_no_ibench_intf.txt already exists, skipping..."
+    if [ -f "experiments/part2a/${PARSEC_EXP}_vs_${IBENCH_EXP}.txt" ]; then
+        echo "File experiments/part2a/${PARSEC_EXP}_vs_${IBENCH_EXP}.txt already exists, skipping..."
         continue
     fi
 
