@@ -4,3 +4,8 @@ sys	0m0.184s
 real	0m7.303s
 user	0m11.980s
 sys	0m0.135s
+
+average user|average sys|average real
+12.2825|0.1595|7.846500000000001
+normalized user|normalized sys|normalized real
+1.1063321923977663|1.049342105263158|1.2692494338401812
