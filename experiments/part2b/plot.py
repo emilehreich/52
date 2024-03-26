@@ -5,7 +5,8 @@ import re
 def get_avg_real_time(file_name):
     with open(file_name, 'r') as f:
         lines = f.readlines()
-        avg_real_time = float(re.findall(r"[-+]?\d*\.\d+|\d+", lines[-2])[2])
+        print(lines, re.findall(r"[-+]?\d*\.\d+|\d+", lines[-1]))
+        avg_real_time = float(re.findall(r"[-+]?\d*\.\d+|\d+", lines[-1])[2])
         return avg_real_time
 
 def plot_graph(experiment):
