@@ -6,7 +6,7 @@ PARSEC_SERVER_ID=$(kubectl get nodes -o wide | grep parsec- | awk '{print substr
 kubectl label nodes parsec-server-$PARSEC_SERVER_ID cca-project-nodetype=parsec
 
 PARSEC_EXPS=("dedup" "blackscholes" "canneal" "ferret" "freqmine" "radix" "vips")
-THREADS=("2" "4" "8")
+THREADS=("1" "2" "4" "8")
 
 for PARSEC_EXP in ${PARSEC_EXPS[@]}
 do
@@ -16,7 +16,7 @@ do
 
         bash -x wait_for_jobs.bash
 
-        kubectl logs $(kubectl get pods --selector=job-name=parsec-$PARSEC_EXP-threads$THREAD --output=jsonpath='{.items[*].metadata.name}') | grep -E 'real|user|sys' >> experiments/part2b/${PARSEC_EXP}_threads${THREAD}.txt
+        kubectl logs $(kubectl get pods --selector=job-name=parsec-$PARSEC_EXP --output=jsonpath='{.items[*].metadata.name}') | grep -E 'real|user|sys' >> experiments/part2b/${PARSEC_EXP}_${THREAD}thread\(s\).txt
 
         kubectl delete jobs --all
     done
