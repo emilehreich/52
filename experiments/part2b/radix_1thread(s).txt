@@ -1,0 +1,6 @@
+real	1m1.169s
+user	0m54.316s
+sys	0m6.836s
+
+average user|average sys|average real
+54.316|6.836|61.169
