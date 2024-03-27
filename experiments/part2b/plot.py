@@ -19,7 +19,7 @@ def plot_graph(experiment):
 
     speedup = [times[0]/time for time in times]
 
-    plt.plot(threads, speedup, marker='o', label=experiment)
+    plt.plot(threads, speedup, marker='o', label=experiment, linewidth=0.01)
 
 experiments = ["dedup", "blackscholes", "canneal", "ferret", "freqmine", "radix", "vips"]
 
