@@ -47,4 +47,4 @@ plt.xticks([0,10000,20000,30000,40000,50000],
 # plt.title('Latency vs QPS over various interference types', fontsize=text_size)
 
 # Display the plot
-plt.savefig("part1_basic.pdf")
+plt.savefig("part1_basic.pdf", bbox_inches='tight')
