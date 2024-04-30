@@ -73,4 +73,28 @@ class Scheduler:
             Schedule the next container to run
         """
         # TODO: implement scheduling policy
+        """
+            Notes from Parts 1-2:
+
+            Workload      | none cpu  l1d  l1i  l2   llc  memBW
+            --------------|------------------------------------
+            blackscholes  | 1.00 1.29 1.34 1.54 1.34 1.48 1.31
+            canneal       | 1.00 1.23 1.38 1.46 1.30 1.92 1.39
+            dedup         | 1.00 1.73 1.28 2.03 1.24 1.98 1.60
+            ferret        | 1.00 1.93 1.27 2.31 1.38 2.47 1.97
+            freqmine      | 1.00 1.99 1.04 2.04 1.03 1.77 1.58
+            radix         | 1.00 1.06 1.11 1.11 1.12 1.52 1.12
+            vips          | 1.00 1.73 1.71 1.88 1.68 1.89 1.68
+
+            Parallelization Speedup (threads)
+            Workload      | 1       2       4
+            --------------|------------------------------------
+            dedup         | 1.00    1.74    2.12
+            blackscholes  | 1.00    1.70    2.63 
+            canneal       | 1.00    1.63    2.43 
+            ferret        | 1.00    1.94    2.82 
+            freqmine      | 1.00    1.97    3.85 
+            radix         | 1.00    2.07    3.96
+            vips          | 1.00    1.37    3.28 
+        """
         pass
