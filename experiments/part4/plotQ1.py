@@ -8,14 +8,14 @@ files = glob.glob('memcachedT?C?.txt')
 # files.append('memcachedT16C2.txt')
 
 # create a new figure
-plt.figure(figsize=(12, 9))
+plt.figure(figsize=(15, 9))
 
 # Define column headers
 headers = ['type', 'avg', 'std', 'min', 'p5', 'p10', 'p50', 'p67', 'p75', 'p80', 'p85', 'p90', 'p95', 'p99', 'p999', 'p9999', 'QPS', 'target', 'ts_start', 'ts_end'] 
 
 # Okabe-Ito color palette                 
-#           black     orange     skyblue  bluishgreen   yellow     blue    vermillion  red-purple    gray
-colors = ["#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999"] 
+#           black     orange     skyblue  bluishgreen red-purple    gray
+colors = ["#000000", "#E69F00", "#56B4E9", "#009E73", "#CC79A7", "#999999"] 
 markers = ["v", "s", "^", "o", "o", "o"]
 
 # Loop through the files list and plot the data from each file
@@ -34,7 +34,7 @@ for index, file in enumerate(files):
 
     # Plot QPS vs average p95, with error bars for stddev (QPS and p95)
     plt.errorbar(result_mean['QPS'], result_mean['p95'], xerr=result_error['QPS'], yerr=result_error['p95'], capsize=2,
-                 label=file[9:-4], linestyle='--', linewidth=1.0, color=colors[index+3], marker=markers[index], markersize=8, fillstyle='none')
+                 label=file[9:-4], linestyle='--', linewidth=1.0, color=colors[index+1], marker=markers[index], markersize=10, fillstyle='none')
 
 plt.plot(range(130000), [1]*130000, linestyle='--', linewidth=2.0, color=colors[-1])
 
