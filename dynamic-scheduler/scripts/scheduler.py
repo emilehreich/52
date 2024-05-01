@@ -5,7 +5,7 @@ from docker.models.containers import Container
 
 
 class Scheduler:
-    def __init__(self):
+    def __init__(self, queues : list):
         self.__client = docker.from_env()
         self.__containers = []
         self.__logger = log.SchedulerLogger()
