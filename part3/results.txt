@@ -1,0 +1,26 @@
+blackscholes: 0.843s needs not a lot, L1I/LLC, parallel up to 1 or 2.        :   colocate with others, it takes a very small amount of time. 
+    standard 6
+canneal: 0m9.829s needs LLC (mem) a lot!!, parallel up to 1 or 2             :  
+    standard 6-7
+dedup: 0m26.150s needs L1I , parallel up to 1 or 2 (not more!!)              :  crashes if collocated with memcached
+    high CPU 0
+ferret: 0m6.483s needs L1I LLC (mem) a lot!!, parallel up to 2.              :  
+    standard 5-6
+freqmine: 0m6.463s needs L1I , parallel up to 4                              :  
+    standard 0-3
+radix: 0m58.453s needs basically nothing except a bit llc, parallel up to 4  :  
+    high mem 0-3
+vips: 1m47.985s needs a small amount. llc l1i , parallelize 4.               :  
+    high mem 0-3
+memcached: cpu L1I Cache, high CPU 0?
+
+
+Greedy resource alloc: look first at most expensive then less, etc.
+
+2 high cpu
+4 high mem
+8 standard
+
+timings:
+
+run everything at the same time except canneal
