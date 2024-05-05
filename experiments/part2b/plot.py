@@ -20,8 +20,9 @@ def plot_graph(experiment):
 
     speedup = [times[0]/time for time in times]
 
-    plt.plot(threads, speedup, marker='o', markersize=1.5, label=experiment, linewidth=0.01)
+    plt.plot(threads, speedup, marker='.', label=experiment, linewidth=0.01)
 
+plt.plot([1, 2, 4, 8], [1, 2, 4, 8], linestyle="dashed", color="0.8", label="linear")
 experiments = ["dedup", "blackscholes", "canneal", "ferret", "freqmine", "radix", "vips"]
 
 for experiment in experiments:
@@ -39,7 +40,7 @@ plt.plot(threads, threads, marker=None, label='Linear Speedup', linestyle=':', l
 
 plt.xlabel('Number of Threads')
 plt.ylabel('Speedup')
-plt.legend(fontsize=9)
-plt.ylim(0.75,7.5)
+# plt.title('Speedup vs Number of Threads')
+plt.legend()
 plt.grid(True)
-plt.savefig("part2b.pdf")
+plt.savefig("part2b.pdf", bbox_inches='tight')
