@@ -18,4 +18,4 @@ RETRIEVE_MEASURES_SCRIPT = "retrieve.sh"
 
 NODES = [CLIENT_AGENT_A, CLIENT_AGENT_B, CLIENT_MEASURE, NODE_TWO_CORES, NODE_FOUR_CORES, NODE_EIGHT_CORES]
 
-MSM_RESULTS_PATH = "/mnt/c/Users/jfreeman/52/experiments/part3"
+MSM_RESULTS_PATH = "/home/jfreeman/52/experiments/part3"
