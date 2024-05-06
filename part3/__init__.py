@@ -10,7 +10,7 @@ NODE_EIGHT_CORES = "node-c-8core" # e2-standard-8
 
 MEMCACHED_SERVICE_NAME = "some-memcached"
 MEMCACHED_IP = None
-NUMBER_RUNS = 1
+NUMBER_RUNS = 3
 
 GCLOUD = "/mnt/c/Users/jfreeman/google-cloud-sdk/bin/gcloud"
 MEASURE_SCRIPT = "measure.sh"

@@ -25,7 +25,12 @@ timings:
 
 run everything at the same time except running canneal after ferret.
 
-Note: by trying dedup on 0-1 collocated with Memcached, it seems that the interference of Memcached with dedup is not worth it at all: 51 seconds!!
+Note: 
+
+collocation of memcached:
+
+- by trying dedup on 0-1 collocated with Memcached, it seems that the interference of Memcached with dedup is not worth it at all: 51 seconds!!
+- cannot colocate memcached with anything because, according to part1/2 the only option is radix, which would become the bottleneck if not on 4 cores (< 60), which is impossible because vips also needs to be on 4 non-standard cores
 
 We tried to collocate vips with other stuff, but it was  the bottleneck anyway, and we wanted to use core 4 of node c.
 
@@ -36,3 +41,5 @@ This means that, because all other jobs are much shorter, we could only make the
 resource reqs/limits:
 
 radix was getting OOM killed all the time...
+
+
