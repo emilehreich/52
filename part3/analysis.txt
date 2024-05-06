@@ -11,7 +11,7 @@ freqmine: 0m6.463s needs L1I , parallel up to 4                              :
 radix: 0m58.453s needs basically nothing except a bit llc, parallel 2        :  
     high mem 0-3
 vips: 1m47.985s needs a small amount. llc l1i , parallelize 4.               :  
-    high mem 0-3
+    high mem 0-3. use requests, but it doesn't really change anything.
 memcached: cpu L1I Cache, high CPU 1
 
 
