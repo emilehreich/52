@@ -12,7 +12,12 @@ spec:
         name: parsec-dedup
         imagePullPolicy: Always
         command: ["/bin/sh"]
-        args: ["-c", "taskset -c 4-7 ./run -a run -S parsec -p dedup -i native -n 1"]
+        args: ["-c", "taskset -c 4-7 ./run -a run -S parsec -p dedup -i native -n 4"]
+        resources:
+          requests: #don't forget, sharing is caring
+            cpu: "4"              # number of cores
+            memory: "8Gi"         # memory in GB
       restartPolicy: Never
+      
       nodeSelector:
         cca-project-nodetype: "node-c-8core"

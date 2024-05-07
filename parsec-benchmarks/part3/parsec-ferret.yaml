@@ -12,7 +12,7 @@ spec:
         name: parsec-ferret
         imagePullPolicy: Always
         command: ["/bin/sh"]
-        args: ["-c", "taskset -c 0-1 ./run -a run -S parsec -p ferret -i simlarge -n 1"]
+        args: ["-c", "taskset -c 0-1 ./run -a run -S parsec -p ferret -i simlarge -n 2"]
       restartPolicy: Never
       nodeSelector:
         cca-project-nodetype: "node-c-8core"
