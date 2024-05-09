@@ -16,6 +16,12 @@ class Job(Enum):
     RADIX = "radix"
     VIPS = "vips"
 
+    def get_Job(name):
+        for job in Job:
+            if job.value == name:
+                return job
+        return None
+
 
 class SchedulerLogger:
     def __init__(self):
