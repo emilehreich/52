@@ -76,10 +76,10 @@ if __name__ == "__main__":
     adjust_resources = False
     
 
-    counter = 0
+    counter = 1
 
     while True:
-        time.sleep(2)  # Sleep for 2 seconds, the basic cycle time for the loop
+        time.sleep(2)  
 
         # monitor CPU utilization
         s_memcached_percent = memcached_percent
@@ -94,23 +94,19 @@ if __name__ == "__main__":
         # Every 5 iterations of 2 seconds each (10 seconds total), adjust resources
         if counter % 5 == 0:
             # adjust memcached resources
-            if memcached_percent > CPU_THRESH and abs(s_memcached_percent - memcached_percent) > 0 and MEMCACHED_LOAD == 0:
+            if memcached_percent > CPU_THRESH and MEMCACHED_LOAD == 0:
                 logger.update_cores(log.Job.MEMCACHED, ["0,1"])
                 update_memcached("0,1", memcached_pid)
                 MEMCACHED_LOAD = 1
-                print("changing mode")
                 s.set_mode(MEMCACHED_LOAD)
                 adjust_resources = True
-            elif memcached_percent <= CPU_THRESH and abs(s_memcached_percent - memcached_percent) > 0 and MEMCACHED_LOAD == 1:
+            elif memcached_percent <= CPU_THRESH and MEMCACHED_LOAD == 1:
                 logger.update_cores(log.Job.MEMCACHED, ["0"])
                 update_memcached("0", memcached_pid)
                 MEMCACHED_LOAD = 0
-                print("changing mode")
                 s.set_mode(MEMCACHED_LOAD)
                 adjust_resources = True
 
-        # Always call s.next() with the state of adjust_resources, whether it was changed or not
         s.next(adjust_resources=adjust_resources)
 
-        # Increment the counter
         counter += 1
