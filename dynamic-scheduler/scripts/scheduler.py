@@ -18,10 +18,9 @@ class Scheduler:
         self.__running_q1 = []
         self.__running_q2 = []
         self.__running_q3 = []
-
         
-        self.__available_cpus = 3
-        self.__cpus = [0,1,1,1]
+        self.__available_cpus = 4
+        self.__cpus = [1,1,1,1]
 
     def set_mode(self, mode):
         self.__mode = mode
@@ -29,11 +28,17 @@ class Scheduler:
             self.__available_cpus = 2
             self.__cpus = [0,0,1,1]
         elif mode == 0:
-            self.__available_cpus = 3
-            self.__cpus = [0,1,1,1]
+            self.__available_cpus = 4
+            self.__cpus = [1,1,1,1]
 
         for container in self.__running_q1:
             self.pause(container)
+            if mode == 1:
+                self.update(container, "2,3")
+                batch.BatchApplication.get_job(container.name).set_cpu_set("2,3")
+            else:
+                self.update(container, "1,2,3")
+                batch.BatchApplication.get_job(container.name).set_cpu_set("1,2,3")
         for container in self.__running_q2:
             self.pause(container)
         for container in self.__running_q3:
@@ -41,13 +46,15 @@ class Scheduler:
 
             
 
-    def update(self, container : Container, cpuset: list[str]):
+    def update(self, container : Container, cpuset: str):
         """
             Update a container
         """
         if container is None:
             return
-        self.__logger.update_cores(log.Job.get_Job(container.name), cpuset)
+        container.reload()
+        if container.status == "running":
+            self.__logger.update_cores(log.Job.get_Job(container.name), cpuset)
         container.update(cpuset_cpus=cpuset)
 
     def remove(self, container : Container):
@@ -66,8 +73,8 @@ class Scheduler:
         if container is None:
             return
         container.reload()
-        self.__logger.job_pause(log.Job.get_Job(container.name))
         if container.status == "running":
+            self.__logger.job_pause(log.Job.get_Job(container.name))
             container.pause()
 
     def startOrResume(self, container : Container):
@@ -86,7 +93,7 @@ class Scheduler:
             print("start : ", container.name )
             job: batch.BatchApplication = batch.BatchApplication.get_job(container.name)
             self.__logger.job_start(log.Job.get_Job(container.name),
-                                job.value[0],
+                                job.value[0].split(","),
                                 job.value[4]
                                 )
             container.start()
@@ -116,6 +123,10 @@ class Scheduler:
                 self.handle_sp_queue()
 
             self.handle_mp_queue(self.__q1, self.__running_q1, 2, adjust_resources)
+        
+        if len(self.__completed) == 7:
+            return True
+        return False
 
 
     def handle_sp_queue(self):
@@ -129,16 +140,18 @@ class Scheduler:
         if self.__available_cpus >= 1:
             c: Container = next(self.__q3, None)
             if c is not None:
-                for i in range(1,4):
+                for i in range(0,4):
                     if self.__cpus[i] == 1:
                         self.update(c, str(i))
+                        batch.BatchApplication.get_job(c.name).set_cpu_set(str(i))
                         self.__cpus[i] = c.name
+
 
                 self.startOrResume(c)
                 self.__running_q3.append(c)
                 self.__available_cpus -= 1
     
-        self.check_and_handle_exited(c, self.__running_q3, 1)
+        self.check_and_handle_exited(self.__running_q3, 1)
 
 
     def handle_mp_queue(self, queue, running_queue, n_cpu, adjust_resources):
@@ -168,6 +181,7 @@ class Scheduler:
         if c is not None:
             if adjust_resources:
                 self.adjust_resources(c, n_cpu)
+            
             self.startOrResume(c)
             running_queue.append(c)
             self.__available_cpus -= n_cpu
@@ -177,7 +191,7 @@ class Scheduler:
         for container in running_queue:
             container.reload()
             if container.status == "exited":
-                for c in range(1,4):
+                for c in range(0,4):
                     if self.__cpus[c] == container.name:
                         self.__cpus[c] = 1
                 running_queue.remove(container)

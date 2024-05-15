@@ -10,7 +10,7 @@ import utils.batch_applications as batch
 # ---------------------------------
 
 MEMCACHED_PROCESS_NAME = "memcached"
-CPU_THRESH = 90
+CPU_THRESH = 40
 
 MEMCACHED_LOAD = 0 # 0: low, 1: high
 
@@ -53,15 +53,15 @@ if __name__ == "__main__":
 
     # initialize queues configurations
     queues = []
-    queue_1 = [create(jobs.FREQMINE.value),
-                create(jobs.VIPS.value) ]
+    queue_1 = [create(jobs.FERRET.value),
+                create(jobs.CANNEAL.value),
+                create(jobs.FREQMINE.value) ]
     
-    queue_2 = [create(jobs.FERRET.value),
-               create(jobs.RADIX.value)]
+    queue_2 = [create(jobs.RADIX.value),
+               create(jobs.VIPS.value)]
     
     queue_3 = [create(jobs.BLACKSHOLES.value), 
-               create(jobs.CANNEAL.value),
-               create(jobs.DEDUP.value)]
+              create(jobs.DEDUP.value)]
 
     queues.append(queue_1)
     queues.append(queue_2)
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     
     adjust_resources = False
     
-
+    logger.job_start(log.Job.MEMCACHED, [0], 2)
     counter = 1
 
     while True:
@@ -91,22 +91,24 @@ if __name__ == "__main__":
         # Initialize the adjust_resources flag to False at each iteration
         adjust_resources = False
 
-        # Every 5 iterations of 2 seconds each (10 seconds total), adjust resources
-        if counter % 5 == 0:
-            # adjust memcached resources
-            if memcached_percent > CPU_THRESH and MEMCACHED_LOAD == 0:
-                logger.update_cores(log.Job.MEMCACHED, ["0,1"])
-                update_memcached("0,1", memcached_pid)
-                MEMCACHED_LOAD = 1
-                s.set_mode(MEMCACHED_LOAD)
-                adjust_resources = True
-            elif memcached_percent <= CPU_THRESH and MEMCACHED_LOAD == 1:
-                logger.update_cores(log.Job.MEMCACHED, ["0"])
-                update_memcached("0", memcached_pid)
-                MEMCACHED_LOAD = 0
-                s.set_mode(MEMCACHED_LOAD)
-                adjust_resources = True
+        
+        # adjust memcached resources
+        if memcached_percent > CPU_THRESH and MEMCACHED_LOAD == 0:
+            logger.update_cores(log.Job.MEMCACHED, ["0,1"])
+            update_memcached("0,1", memcached_pid)
+            MEMCACHED_LOAD = 1
+            s.set_mode(MEMCACHED_LOAD)
+            adjust_resources = True
+        elif memcached_percent <= CPU_THRESH and MEMCACHED_LOAD == 1:
+            logger.update_cores(log.Job.MEMCACHED, ["0"])
+            update_memcached("0", memcached_pid)
+            MEMCACHED_LOAD = 0
+            s.set_mode(MEMCACHED_LOAD)
+            adjust_resources = True
 
-        s.next(adjust_resources=adjust_resources)
-
+        ret = s.next(adjust_resources=adjust_resources)
+        if ret:
+            break
         counter += 1
+
+    logger.end()

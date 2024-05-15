@@ -1,0 +1,170 @@
+2024-05-14T12:10:57.090784 start scheduler
+2024-05-14T12:10:59.094607 start ferret [2,3] 2
+2024-05-14T12:11:03.349667 update_cores ferret [2,3]
+2024-05-14T12:11:03.380886 pause ferret
+2024-05-14T12:11:03.400222 update_cores radix [2,3]
+2024-05-14T12:11:03.408143 start radix [2,3] 2
+2024-05-14T12:11:29.803512 update_cores ferret [1,2,3]
+2024-05-14T12:11:29.825565 unpause ferret
+2024-05-14T12:11:29.840706 end radix
+2024-05-14T12:11:29.850512 update_cores blackscholes [1]
+2024-05-14T12:11:29.857665 start blackscholes [1] 1
+2024-05-14T12:11:34.183305 update_cores ferret [2,3]
+2024-05-14T12:11:34.235111 pause ferret
+2024-05-14T12:11:34.282049 pause blackscholes
+2024-05-14T12:11:34.298986 update_cores vips [2,3]
+2024-05-14T12:11:34.306617 start vips [2,3] 2
+2024-05-14T12:11:38.613389 update_cores ferret [1,2,3]
+2024-05-14T12:11:38.637936 pause vips
+2024-05-14T12:11:38.654398 unpause ferret
+2024-05-14T12:11:48.720947 update_cores ferret [2,3]
+2024-05-14T12:11:49.622166 pause ferret
+2024-05-14T12:11:50.414733 unpause vips
+2024-05-14T12:12:07.372147 update_cores ferret [1,2,3]
+2024-05-14T12:12:07.395738 pause vips
+2024-05-14T12:12:07.422277 unpause ferret
+2024-05-14T12:12:15.473155 update_cores ferret [2,3]
+2024-05-14T12:12:15.501468 pause ferret
+2024-05-14T12:12:15.521503 unpause vips
+2024-05-14T12:12:44.718966 end vips
+2024-05-14T12:12:45.245001 unpause blackscholes
+2024-05-14T12:12:45.264079 update_cores dedup [2]
+2024-05-14T12:12:45.273099 start dedup [2] 1
+2024-05-14T12:13:03.634863 update_cores ferret [1,2,3]
+2024-05-14T12:13:03.667848 pause blackscholes
+2024-05-14T12:13:03.684439 pause dedup
+2024-05-14T12:13:03.710333 unpause ferret
+2024-05-14T12:13:13.772747 update_cores ferret [2,3]
+2024-05-14T12:13:13.826667 pause ferret
+2024-05-14T12:13:13.865282 unpause blackscholes
+2024-05-14T12:13:13.893245 unpause dedup
+2024-05-14T12:14:14.076686 update_cores ferret [1,2,3]
+2024-05-14T12:14:14.100648 pause blackscholes
+2024-05-14T12:14:14.117442 unpause ferret
+2024-05-14T12:14:18.168037 update_cores ferret [2,3]
+2024-05-14T12:14:18.211307 pause ferret
+2024-05-14T12:14:18.245434 unpause blackscholes
+2024-05-14T12:14:18.270822 end dedup
+2024-05-14T12:14:38.875086 update_cores ferret [1,2,3]
+2024-05-14T12:14:38.900786 unpause ferret
+2024-05-14T12:14:42.945195 update_cores ferret [2,3]
+2024-05-14T12:14:42.993499 pause ferret
+2024-05-14T12:14:43.024330 end blackscholes
+2024-05-14T12:14:43.417949 unpause ferret
+2024-05-14T12:15:13.547805 update_cores ferret [1,2,3]
+2024-05-14T12:15:13.576375 pause ferret
+2024-05-14T12:15:13.593388 unpause ferret
+2024-05-14T12:15:17.634403 update_cores ferret [2,3]
+2024-05-14T12:15:17.666664 pause ferret
+2024-05-14T12:15:17.696025 unpause ferret
+2024-05-14T12:15:23.737965 update_cores ferret [1,2,3]
+2024-05-14T12:15:23.764542 pause ferret
+2024-05-14T12:15:23.781827 unpause ferret
+2024-05-14T12:15:29.826828 update_cores ferret [2,3]
+2024-05-14T12:15:29.851332 pause ferret
+2024-05-14T12:15:29.877570 unpause ferret
+2024-05-14T12:15:33.914991 update_cores ferret [1,2,3]
+2024-05-14T12:15:33.943017 pause ferret
+2024-05-14T12:15:33.961067 unpause ferret
+2024-05-14T12:15:38.011922 update_cores ferret [2,3]
+2024-05-14T12:15:38.049714 pause ferret
+2024-05-14T12:15:38.070139 unpause ferret
+2024-05-14T12:16:34.239539 update_cores ferret [1,2,3]
+2024-05-14T12:16:34.263088 pause ferret
+2024-05-14T12:16:34.279031 unpause ferret
+2024-05-14T12:16:38.326279 update_cores ferret [2,3]
+2024-05-14T12:16:38.369314 pause ferret
+2024-05-14T12:16:38.389845 unpause ferret
+2024-05-14T12:16:58.483022 update_cores ferret [1,2,3]
+2024-05-14T12:16:58.507038 pause ferret
+2024-05-14T12:16:58.522876 unpause ferret
+2024-05-14T12:17:00.542233 end ferret
+2024-05-14T12:17:02.706292 update_cores canneal [2,3]
+2024-05-14T12:17:02.722763 start canneal [1,2,3] 3
+2024-05-14T12:17:53.276029 update_cores canneal [1,2,3]
+2024-05-14T12:17:53.298366 pause canneal
+2024-05-14T12:17:53.313035 unpause canneal
+2024-05-14T12:17:57.358187 update_cores canneal [2,3]
+2024-05-14T12:17:57.398950 pause canneal
+2024-05-14T12:17:57.419989 unpause canneal
+2024-05-14T12:18:03.465446 update_cores canneal [1,2,3]
+2024-05-14T12:18:03.489083 pause canneal
+2024-05-14T12:18:03.519504 unpause canneal
+2024-05-14T12:18:07.559451 update_cores canneal [2,3]
+2024-05-14T12:18:07.586323 pause canneal
+2024-05-14T12:18:07.613883 unpause canneal
+2024-05-14T12:18:59.750029 update_cores canneal [1,2,3]
+2024-05-14T12:18:59.774446 pause canneal
+2024-05-14T12:18:59.790372 unpause canneal
+2024-05-14T12:19:07.849988 update_cores canneal [2,3]
+2024-05-14T12:19:07.890062 pause canneal
+2024-05-14T12:19:07.923706 unpause canneal
+2024-05-14T12:19:13.982902 update_cores canneal [1,2,3]
+2024-05-14T12:19:14.006110 pause canneal
+2024-05-14T12:19:14.021330 unpause canneal
+2024-05-14T12:19:22.068983 update_cores canneal [2,3]
+2024-05-14T12:19:22.102161 pause canneal
+2024-05-14T12:19:22.127477 unpause canneal
+2024-05-14T12:19:28.166591 end canneal
+2024-05-14T12:19:30.206136 start freqmine [1,2,3] 3
+2024-05-14T12:19:48.509640 update_cores freqmine [1,2,3]
+2024-05-14T12:19:48.533565 pause freqmine
+2024-05-14T12:19:48.552857 unpause freqmine
+2024-05-14T12:19:58.609823 update_cores freqmine [2,3]
+2024-05-14T12:19:58.653717 pause freqmine
+2024-05-14T12:19:58.699908 unpause freqmine
+2024-05-14T12:20:04.763816 update_cores freqmine [1,2,3]
+2024-05-14T12:20:04.789883 pause freqmine
+2024-05-14T12:20:04.807037 unpause freqmine
+2024-05-14T12:20:08.858257 update_cores freqmine [2,3]
+2024-05-14T12:20:08.910215 pause freqmine
+2024-05-14T12:20:08.939534 unpause freqmine
+2024-05-14T12:20:39.058462 update_cores freqmine [1,2,3]
+2024-05-14T12:20:39.082851 pause freqmine
+2024-05-14T12:20:39.100746 unpause freqmine
+2024-05-14T12:20:43.140664 update_cores freqmine [2,3]
+2024-05-14T12:20:43.182995 pause freqmine
+2024-05-14T12:20:43.202303 unpause freqmine
+2024-05-14T12:20:53.254145 update_cores freqmine [1,2,3]
+2024-05-14T12:20:53.275987 pause freqmine
+2024-05-14T12:20:53.292891 unpause freqmine
+2024-05-14T12:20:57.336973 update_cores freqmine [2,3]
+2024-05-14T12:20:57.381051 pause freqmine
+2024-05-14T12:20:57.412039 unpause freqmine
+2024-05-14T12:21:03.481250 update_cores freqmine [1,2,3]
+2024-05-14T12:21:03.504231 pause freqmine
+2024-05-14T12:21:03.521349 unpause freqmine
+2024-05-14T12:21:07.570292 update_cores freqmine [2,3]
+2024-05-14T12:21:07.620390 pause freqmine
+2024-05-14T12:21:07.639328 unpause freqmine
+2024-05-14T12:21:49.774638 update_cores freqmine [1,2,3]
+2024-05-14T12:21:49.798710 pause freqmine
+2024-05-14T12:21:49.814563 unpause freqmine
+2024-05-14T12:21:53.858173 update_cores freqmine [2,3]
+2024-05-14T12:21:53.903699 pause freqmine
+2024-05-14T12:21:53.924295 unpause freqmine
+2024-05-14T12:22:10.013794 update_cores freqmine [1,2,3]
+2024-05-14T12:22:10.037197 pause freqmine
+2024-05-14T12:22:10.063256 unpause freqmine
+2024-05-14T12:22:14.109096 update_cores freqmine [2,3]
+2024-05-14T12:22:14.138095 pause freqmine
+2024-05-14T12:22:14.156003 unpause freqmine
+2024-05-14T12:22:20.205088 update_cores freqmine [1,2,3]
+2024-05-14T12:22:20.227951 pause freqmine
+2024-05-14T12:22:20.253446 unpause freqmine
+2024-05-14T12:22:28.300813 update_cores freqmine [2,3]
+2024-05-14T12:22:28.340574 pause freqmine
+2024-05-14T12:22:28.359216 unpause freqmine
+2024-05-14T12:22:38.413644 update_cores freqmine [1,2,3]
+2024-05-14T12:22:38.439876 pause freqmine
+2024-05-14T12:22:38.454514 unpause freqmine
+2024-05-14T12:22:48.510306 update_cores freqmine [2,3]
+2024-05-14T12:22:48.557855 pause freqmine
+2024-05-14T12:22:48.606270 unpause freqmine
+2024-05-14T12:22:54.677345 update_cores freqmine [1,2,3]
+2024-05-14T12:22:54.700072 pause freqmine
+2024-05-14T12:22:54.716712 unpause freqmine
+2024-05-14T12:22:58.758786 update_cores freqmine [2,3]
+2024-05-14T12:22:58.789948 pause freqmine
+2024-05-14T12:22:58.806762 unpause freqmine
+2024-05-14T12:23:14.854788 end freqmine
