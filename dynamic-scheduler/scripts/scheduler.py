@@ -20,25 +20,28 @@ class Scheduler:
         self.__running_q3 = []
         
         self.__available_cpus = 4
-        self.__cpus = [1,1,1,1]
+        self.__cpus = [0,1,1,1]
 
     def set_mode(self, mode):
         self.__mode = mode
         if mode == 1:
+            self.__logger.update_cores(log.Job.MEMCACHED, ["0,1"])
             self.__available_cpus = 2
             self.__cpus = [0,0,1,1]
         elif mode == 0:
+            self.__logger.update_cores(log.Job.MEMCACHED, ["0"])
             self.__available_cpus = 4
-            self.__cpus = [1,1,1,1]
+            self.__cpus = [0,1,1,1]
 
         for container in self.__running_q1:
-            self.pause(container)
+            #self.pause(container)
             if mode == 1:
                 self.update(container, "2,3")
                 batch.BatchApplication.get_job(container.name).set_cpu_set("2,3")
             else:
                 self.update(container, "1,2,3")
                 batch.BatchApplication.get_job(container.name).set_cpu_set("1,2,3")
+            self.pause(container)
         for container in self.__running_q2:
             self.pause(container)
         for container in self.__running_q3:
@@ -191,13 +194,10 @@ class Scheduler:
         for container in running_queue:
             container.reload()
             if container.status == "exited":
-                for c in range(0,4):
+                for c in range(1,4):
                     if self.__cpus[c] == container.name:
                         self.__cpus[c] = 1
                 running_queue.remove(container)
                 self.remove(container)
                 self.__completed.append(container)
                 self.__available_cpus += n_cpu
-        
-                
-        

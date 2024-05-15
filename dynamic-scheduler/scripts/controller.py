@@ -47,9 +47,9 @@ if __name__ == "__main__":
             break
 
     update_memcached("0", memcached_pid)
-
-    p_memcached = psutil.Process(memcached_pid)
     logger.job_start(log.Job.MEMCACHED, [0], 2)
+    p_memcached = psutil.Process(memcached_pid)
+    #logger.job_start(log.Job.MEMCACHED, [0], 2)
 
     # initialize queues configurations
     queues = []
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     counter = 1
 
     while True:
-        time.sleep(2)  
+        time.sleep(4)  
 
         # monitor CPU utilization
         s_memcached_percent = memcached_percent
@@ -94,13 +94,13 @@ if __name__ == "__main__":
         
         # adjust memcached resources
         if memcached_percent > CPU_THRESH and MEMCACHED_LOAD == 0:
-            logger.update_cores(log.Job.MEMCACHED, ["0,1"])
+           # logger.update_cores(log.Job.MEMCACHED, ["0,1"])
             update_memcached("0,1", memcached_pid)
             MEMCACHED_LOAD = 1
             s.set_mode(MEMCACHED_LOAD)
             adjust_resources = True
         elif memcached_percent <= CPU_THRESH and MEMCACHED_LOAD == 1:
-            logger.update_cores(log.Job.MEMCACHED, ["0"])
+            #logger.update_cores(log.Job.MEMCACHED, ["0"])
             update_memcached("0", memcached_pid)
             MEMCACHED_LOAD = 0
             s.set_mode(MEMCACHED_LOAD)
