@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib import colors
 import numpy as np
-from plot_utils import extract_segments, extract_results, extract_times
+from plot_utils import extract_segments, extract_results, extract_times, count_cores
 from matplotlib.lines import Line2D
 
 
@@ -170,8 +170,13 @@ for part, interval in [(3, 10000)]:
         )
         qps_ax = cores_ax.twinx()
 
-        memcached_cores = np.full_like(time, 2)
-        cores_ax.plot(time, memcached_cores, label="Memcached Cores")
+        memcached_times, memcached_cores = count_cores(i)
+        memcached_times = [time - starttime for time in memcached_times]
+        for i, c in enumerate(list(memcached_cores[:-1])):
+            memcached_cores.insert(2*i+1, c)
+        for i, t in enumerate(list(memcached_times[:-1])):
+            memcached_times.insert(2*i+1, memcached_times[2*i+1]-1)
+        cores_ax.plot(memcached_times, memcached_cores, label="Memcached Cores")
         qps_ax.scatter(
             time,
             qps,

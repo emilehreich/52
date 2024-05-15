@@ -62,7 +62,7 @@ def extract_times(part):
 
     for i in range(3):
         with open(
-            f"../Q3/jobs_{i + 1}.txt", "r"
+            f"../Q4/jobs_{i + 1}.txt", "r"
         ) as file:
             starttime = None
             endtime = None
@@ -89,7 +89,7 @@ def extract_segments(part):
 
     for i in range(3):
         with open(
-            f"../Q3/jobs_{i + 1}.txt", "r"
+            f"../Q4/jobs_{i + 1}.txt", "r"
         ) as file:
             jobs = {}
             for line in file.readlines():
@@ -146,13 +146,30 @@ def extract_segments(part):
     return runs
 
 
+def count_cores(run):
+    with open(f"../Q4/jobs_{run}.txt", "r") as file:
+        lines = file.readlines()
+    times = list()
+    counts = list()
+    for line in lines:
+        if 'memcached' in line:
+                tokens = line.split()
+                cores = tokens[3]
+                time = floor(dateutil.parser.isoparse(tokens[0] + "Z").timestamp() * 1000)
+                cores = cores.strip('[]').split(',')
+                count = 1 if len(cores) == 1 else 2
+                times.append(time)
+                counts.append(count)
+    return times, counts
+
+
 def extract_results(part, interval):
     runs = {}
     for i in range(3):
         data = []
 
         with open(
-            f"../Q3/mcperf_{i + 1}.txt", "r"
+            f"../Q4/mcperf_{i + 1}.txt", "r"
         ) as file:
             lines = file.readlines()
 
