@@ -25,11 +25,11 @@ class Scheduler:
     def set_mode(self, mode):
         self.__mode = mode
         if mode == 1:
-            self.__logger.update_cores(log.Job.MEMCACHED, ["0,1"])
+            self.__logger.update_cores(log.Job.MEMCACHED, "0,1")
             self.__available_cpus = 2
             self.__cpus = [0,0,1,1]
         elif mode == 0:
-            self.__logger.update_cores(log.Job.MEMCACHED, ["0"])
+            self.__logger.update_cores(log.Job.MEMCACHED, "0")
             self.__available_cpus = 4
             self.__cpus = [0,1,1,1]
 
