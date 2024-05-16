@@ -40,7 +40,7 @@ bar_lines = [
     ),
 ]
 
-for part, interval in [(3, 10000)]:
+for part, interval in [(4, 5000)]:
     for i in range(1, 4):
         # Extract the data for the run
         runs_segments = extract_segments(part)
@@ -85,7 +85,7 @@ for part, interval in [(3, 10000)]:
             fontsize=16,
         )
         jobs_ax.set_title(
-            f"Dynamic Scheduling policy with a 10s QPS interval",
+            f"Dynamic Scheduling policy with a 5s QPS interval",
             y=1.01,
             fontsize=12,
         )
@@ -164,7 +164,7 @@ for part, interval in [(3, 10000)]:
             fontsize=16,
         )
         cores_ax.set_title(
-            f"Using our scheduling policy with a 10s interval",
+            f"Using our scheduling policy with a 5s interval",
             y=1.01,
             fontsize=12,
         )
