@@ -62,7 +62,7 @@ def extract_times(part):
 
     for i in range(3):
         with open(
-            f"../Q4/jobs_{i + 1}.txt", "r"
+            f"../Q{part}/jobs_{i + 1}.txt", "r"
         ) as file:
             starttime = None
             endtime = None
@@ -89,7 +89,7 @@ def extract_segments(part):
 
     for i in range(3):
         with open(
-            f"../Q4/jobs_{i + 1}.txt", "r"
+            f"../Q{part}/jobs_{i + 1}.txt", "r"
         ) as file:
             jobs = {}
             for line in file.readlines():
@@ -146,8 +146,8 @@ def extract_segments(part):
     return runs
 
 
-def count_cores(run):
-    with open(f"../Q4/jobs_{run}.txt", "r") as file:
+def count_cores(part, run):
+    with open(f"../Q{part}/jobs_{run}.txt", "r") as file:
         lines = file.readlines()
     times = list()
     counts = list()
@@ -169,7 +169,7 @@ def extract_results(part, interval):
         data = []
 
         with open(
-            f"../Q4/mcperf_{i + 1}.txt", "r"
+            f"../Q{part}/mcperf_{i + 1}.txt", "r"
         ) as file:
             lines = file.readlines()
 

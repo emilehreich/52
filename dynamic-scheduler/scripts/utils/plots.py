@@ -40,7 +40,7 @@ bar_lines = [
     ),
 ]
 
-for part, interval in [(4, 5000)]:
+for part, interval in [(3, 10000)]:
     for i in range(1, 4):
         # Extract the data for the run
         runs_segments = extract_segments(part)
@@ -84,8 +84,12 @@ for part, interval in [(4, 5000)]:
             y=0.97,
             fontsize=16,
         )
+        if part==3:
+            title = "Dynamic Scheduling policy with a 10s QPS interval"
+        else:
+            title = "Dynamic Scheduling policy with a 5s QPS interval"
         jobs_ax.set_title(
-            f"Dynamic Scheduling policy with a 5s QPS interval",
+            title,
             y=1.01,
             fontsize=12,
         )
@@ -163,14 +167,18 @@ for part, interval in [(4, 5000)]:
             y=0.97,
             fontsize=16,
         )
+        if part==3:
+            title="Using our scheduling policy with a 10s interval"
+        else:
+            title="Using our scheduling policy with a 5s interval"
         cores_ax.set_title(
-            f"Using our scheduling policy with a 5s interval",
+            title,
             y=1.01,
             fontsize=12,
         )
         qps_ax = cores_ax.twinx()
 
-        memcached_times, memcached_cores = count_cores(i)
+        memcached_times, memcached_cores = count_cores(part, i)
         memcached_times = [time - starttime for time in memcached_times]
         for i, c in enumerate(list(memcached_cores[:-1])):
             memcached_cores.insert(2*i+1, c)
