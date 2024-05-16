@@ -85,7 +85,7 @@ for part, interval in [(3, 10000)]:
             fontsize=16,
         )
         jobs_ax.set_title(
-            f"Dynamic Scheduling policy with a 5s QPS interval",
+            f"Dynamic Scheduling policy with a 10s QPS interval",
             y=1.01,
             fontsize=12,
         )
@@ -164,7 +164,7 @@ for part, interval in [(3, 10000)]:
             fontsize=16,
         )
         cores_ax.set_title(
-            f"Using our scheduling policy with a 5s interval",
+            f"Using our scheduling policy with a 10s interval",
             y=1.01,
             fontsize=12,
         )
