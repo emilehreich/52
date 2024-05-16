@@ -79,7 +79,7 @@ if __name__ == "__main__":
     counter = 1
 
     while True:
-        time.sleep(4)  
+        time.sleep(1)  
 
         # monitor CPU utilization
         s_memcached_percent = memcached_percent

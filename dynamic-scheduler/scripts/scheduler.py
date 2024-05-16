@@ -182,9 +182,9 @@ class Scheduler:
     def process_new_container(self, queue, running_queue: list, n_cpu, adjust_resources):
         c = next(queue, None)
         if c is not None:
-            if adjust_resources:
-                self.adjust_resources(c, n_cpu)
-            
+            #if adjust_resources:
+            #    self.adjust_resources(c, n_cpu)
+            self.adjust_resources(c, n_cpu)
             self.startOrResume(c)
             running_queue.append(c)
             self.__available_cpus -= n_cpu
