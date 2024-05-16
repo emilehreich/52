@@ -3,7 +3,6 @@ from datetime import datetime
 import numpy as np
 
 import dateutil.parser
-import pandas as pd
 
 JOBS: set = {"blackscholes", "canneal", "dedup", "ferret", "freqmine", "radix", "vips", "all"}
 
@@ -65,6 +64,41 @@ def calc_and_print_runtimes():
         print("{:15s} avg: {:7.2f} std: {:5.2f}".format(job, arr.mean(), arr.std()))
 
 
+def calculate_SLO():
+    for i in range(3):
+        with open(f"../Q4/mcperf_{i + 1}.txt", 'r') as file:
+            lines = file.readlines()
+
+        # Extract the start timestamp
+        timestamp_start = 0
+        for line in lines:
+            if line.startswith("Timestamp start:"):
+                timestamp_start = int(line.split(":")[1].strip())
+                break
+
+        # Output list to store results
+        output = []
+        SLO_breach = 0
+        # Process each line to extract time and p95 value
+        line_number = 0
+        for line in lines:
+            parts = line.split()
+            if len(parts) > 12 and parts[0] == 'read':  # Ensuring it's a data line with sufficient columns
+                # Calculate time
+                time = timestamp_start + line_number * 5000
+
+                # Extract p95 value (12th column)
+                p95 = parts[12]
+                if float(p95) > 1000:
+                    SLO_breach += 1
+                # Append result to the output list
+                output.append((time, p95))
+                # Increment line number for next calculation
+                line_number += 1
+        print(
+            f"Run {i + 1}: {SLO_breach} / {line_number} = {round(SLO_breach / line_number * 100, 1)}%\tSLO violation ratio")
+
+
 if __name__ == "__main__":
     """
     df = pd.read_csv('submission/part_4_3_results_group_054/mcperf_1.txt', delim_whitespace=True)
@@ -73,5 +107,5 @@ if __name__ == "__main__":
     print(p95[p95 > 1000].count())
     print(p95[p95 > 1000].count() / 720)
     """
-
     calc_and_print_runtimes()
+    calculate_SLO()
