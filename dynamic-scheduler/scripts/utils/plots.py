@@ -40,7 +40,7 @@ bar_lines = [
     ),
 ]
 
-for part, interval in [(4, 5000)]:
+for part, interval in [(4, 8650)]:
     for i in range(1, 4):
         # Extract the data for the run
         runs_segments = extract_segments(part)
@@ -87,7 +87,7 @@ for part, interval in [(4, 5000)]:
         if part==3:
             title = "Dynamic Scheduling policy with a 10s QPS interval"
         else:
-            title = "Dynamic Scheduling policy with a 5s QPS interval"
+            title = "Dynamic Scheduling policy with a 8.65s QPS interval"
         jobs_ax.set_title(
             title,
             y=1.01,
@@ -170,7 +170,7 @@ for part, interval in [(4, 5000)]:
         if part==3:
             title="Using our scheduling policy with a 10s interval"
         else:
-            title="Using our scheduling policy with a 5s interval"
+            title="Using our scheduling policy with a 8.65s interval"
         cores_ax.set_title(
             title,
             y=1.01,
