@@ -40,7 +40,7 @@ bar_lines = [
     ),
 ]
 
-for part, interval in [(3, 10000)]:
+for part, interval in [(4, 8650)]:
     for i in range(1, 4):
         # Extract the data for the run
         runs_segments = extract_segments(part)
@@ -87,7 +87,7 @@ for part, interval in [(3, 10000)]:
         if part==3:
             title = "Dynamic Scheduling policy with a 10s QPS interval"
         else:
-            title = "Dynamic Scheduling policy with a 5s QPS interval"
+            title = "Dynamic Scheduling policy with a 8.65s QPS interval"
         jobs_ax.set_title(
             title,
             y=1.01,
@@ -122,7 +122,7 @@ for part, interval in [(3, 10000)]:
             qps,
             color="limegreen",
             label="QPS",
-            s=20,
+            s=150,
             marker=".",
         )
 
@@ -170,7 +170,7 @@ for part, interval in [(3, 10000)]:
         if part==3:
             title="Using our scheduling policy with a 10s interval"
         else:
-            title="Using our scheduling policy with a 5s interval"
+            title="Using our scheduling policy with a 8.65s interval"
         cores_ax.set_title(
             title,
             y=1.01,
@@ -190,7 +190,7 @@ for part, interval in [(3, 10000)]:
             qps,
             color="limegreen",
             label="QPS",
-            s=20,
+            s=150,
             marker=".",
         )
 
@@ -224,147 +224,3 @@ for part, interval in [(3, 10000)]:
         fake_ax.axis("off")
 
         plt.show()
-
-# import matplotlib.pyplot as plt
-# import matplotlib.ticker as ticker
-# import numpy as np
-# from plot_utils import extract_segments, extract_results, extract_times
-# from matplotlib.lines import Line2D
-
-# JOBS_COLORS = {
-#     "blackscholes": "#CCA000",
-#     "canneal": "#CCCCAA",
-#     "dedup": "#CCACCA",
-#     "ferret": "#AACCCA",
-#     "freqmine": "#0CCA00",
-#     "radix": "#00CCA0",
-#     "vips": "#CC0A00",
-# }
-# jobs_lines = [
-#     Line2D([0], [0], color=color, label=name, lw=4)
-#     for name, color in JOBS_COLORS.items()
-# ]
-
-# event_lines = [
-#     Line2D([0], [0], color='black', linestyle='-', lw=2, label='Job Start/Resume'),
-#     Line2D([0], [0], color='red', linestyle=':', lw=2, label='Job Pause'),
-#     Line2D([0], [0], color='blue', linestyle='--', lw=2, label='Job End'),
-# ]
-
-# def format_seconds(x, pos):
-#     seconds = int(x / 1000)  # Convert milliseconds to seconds
-#     return f"{seconds}"
-
-# def format_qps(x, pos):
-#     if x == 0:
-#         return "0"
-#     return f"{x/1000:.0f}K"
-
-# def plot_jobs(axes, jobs, starttime, endtime):
-#     height_step = 0.2  # Step to separate job periods visually
-#     for idx, (job_name, job) in enumerate(jobs.items()):
-#         for segment in job.segments:
-#             start_time = float(segment.start) - starttime
-#             end_time = float(segment.end) - starttime
-#             axes.axvspan(start_time, end_time, color=JOBS_COLORS[job_name], alpha=0.3, ymin=0, ymax=height_step * (idx + 1))
-#             axes.axvline(x=start_time, color='black', linestyle='-')
-#             if start_time != end_time:
-#                 axes.axvline(x=end_time, color='blue', linestyle='--')
-
-# for part, interval in [(3, 10000)]:
-#     for i in range(1, 4):
-#         # Extract the data for the run
-#         runs_segments = extract_segments(part)
-#         jobs = runs_segments[i]
-#         runs_data = extract_results(part, interval)
-#         data = runs_data[i]
-#         runs_times = extract_times(part)
-#         (starttime, endtime) = runs_times[i]
-#         time = [time - starttime for _, _, time in data]  # Time values
-#         qps = [qps for qps, _, _ in data]
-#         latency = [latency for _, latency, _ in data]
-
-#         # Generate subplots for job running periods, 1A and 1B
-#         fig, axes = plt.subplots(2, 1, figsize=(12, 12), sharex=True, gridspec_kw={'height_ratios': [2, 2]})
-
-#         # Plot 1A: Latency and QPS
-#         plot_jobs(axes[0], jobs, starttime, endtime)
-        
-#         axes[0].bar(
-#             time,
-#             latency,
-#             width=interval,
-#             align="center",
-#             color=[(min(l, 1), 0, 0) for l in latency],
-#             zorder=3,
-#             label="Latency",
-#         )
-#         axes[0].axhline(y=1, color="#555", linestyle="--", linewidth=1, label="1ms SLO")
-
-#         qps_ax = axes[0].twinx()
-#         qps_ax.scatter(
-#             time,
-#             qps,
-#             color="limegreen",
-#             label="QPS",
-#             s=20,
-#             marker=".",
-#         )
-
-#         axes[0].set_ylabel("95th Percentile Latency [ms]")
-#         qps_ax.set_ylabel("QPS")
-#         axes[0].set_xlim(0, 900_000)
-#         axes[0].set_ylim(0, 1.6)
-#         qps_ax.set_ylim(0, 120_000)
-#         qps_ax.set_yticks(np.linspace(0, 120_000, 9))
-
-#         axes[0].xaxis.set_major_formatter(ticker.FuncFormatter(format_seconds))
-#         qps_ax.yaxis.set_major_formatter(ticker.FuncFormatter(format_qps))
-
-#         axes[0].grid(True, linestyle="--", linewidth=0.5, which="major")
-#         axes[0].xaxis.grid(True, linestyle="--", color="#e1e1e1", linewidth=0.5, which="minor")
-
-#         # Plot 1B: Memcached cores and QPS
-#         cores_ax = axes[1]
-#         qps_ax2 = cores_ax.twinx()
-
-#         memcached_cores = np.full_like(time, 2)
-#         cores_ax.plot(time, memcached_cores, label="Memcached Cores", color='blue')
-#         qps_ax2.scatter(
-#             time,
-#             qps,
-#             color="limegreen",
-#             label="QPS",
-#             s=20,
-#             marker=".",
-#         )
-
-#         cores_ax.set_xlabel("Time [s]")
-#         cores_ax.set_ylabel("Memcached Cores")
-#         qps_ax2.set_ylabel("QPS")
-#         cores_ax.set_xlim(0, 900_000)
-#         cores_ax.set_ylim(0, 4)
-#         qps_ax2.set_ylim(0, 120_000)
-#         qps_ax2.set_yticks(np.linspace(0, 120_000, 9))
-
-#         cores_ax.xaxis.set_major_formatter(ticker.FuncFormatter(format_seconds))
-#         qps_ax2.yaxis.set_major_formatter(ticker.FuncFormatter(format_qps))
-
-#         cores_ax.grid(True, linestyle="--", linewidth=0.5, which="major")
-#         cores_ax.xaxis.grid(True, linestyle="--", color="#e1e1e1", linewidth=0.5, which="minor")
-
-#         fig.suptitle(f"Run {i}", fontsize=16)
-#         axes[0].set_title("Plot A: 95th Percentile Latency and QPS vs. Time")
-#         cores_ax.set_title("Plot B: Memcached Cores and QPS vs. Time")
-
-#         # Add legends
-#         handles, labels = axes[0].get_legend_handles_labels()
-#         handles.extend(event_lines)
-#         handles.extend(jobs_lines)
-#         labels.extend([line.get_label() for line in event_lines])
-#         labels.extend([line.get_label() for line in jobs_lines])
-#         axes[0].legend(handles=handles, labels=labels, loc='upper right')
-
-#         plt.tight_layout(rect=[0, 0, 1, 0.96])
-#         plt.show()
-
