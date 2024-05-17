@@ -12,7 +12,8 @@ spec:
         name: parsec-canneal
         imagePullPolicy: Always
         command: ["/bin/sh"]
-        args: ["-c", "taskset -c 1-2 ./run -a run -S parsec -p canneal -i simlarge -n 1"] # only one thread because startup time is too long
+        args: ["-c", "taskset -c 0-1 ./run -a run -S parsec -p canneal -i native -n 2"] # only one thread because startup time is too long
+      
       restartPolicy: Never
       nodeSelector:
-        cca-project-nodetype: "node-c-8core"
+        cca-project-nodetype: "node-a-2core"

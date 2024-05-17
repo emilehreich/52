@@ -31,6 +31,7 @@ def main(args):
             
             if("Running" in sh.stdout.decode("utf-8")):
                 MEMCACHED_START = True
+            
             time.sleep(1)
         print("Memcached restarted!")
     if args.delete_cluster or args.restart_cluster:
@@ -58,6 +59,8 @@ def main(args):
         sh = subprocess.run(next_command, shell=True, capture_output=True)
 
         print("Waiting for cluster to be ready...")
+        sh = subprocess.run("kops export kubecfg --admin", shell=True, capture_output=True)
+        print(sh.stdout.decode("utf-8"))
         sh = subprocess.run("kops validate cluster --name part3.k8s.local --wait 10m", shell=True, capture_output=False)
         
         if not sh.returncode == 0:
@@ -162,11 +165,11 @@ def main(args):
  
     print(f"""To launch measurement by hand run the following commands in order:
         1. {agent_a_login_command}
-        2. {agent_a_command}
+        2. {agent_a_launch_command}
         3. {agent_b_login_command}
-        4. {agent_b_command}
+        4. {agent_b_launch_command}
         5. {agent_msmt_login_command}
-        6. {agent_msmt_command}""")
+        6. {agent_msmt_launch_command}""")
     
     
     # Output commands as a script in a single line

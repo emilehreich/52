@@ -13,6 +13,11 @@ spec:
         imagePullPolicy: Always
         command: ["/bin/sh"]
         args: ["-c", "taskset -c 0-3 ./run -a run -S parsec -p vips -i native -n 4"]
+        resources:
+          requests:
+            cpu: 1
+            memory: 8Gi
+            
       restartPolicy: Never
       nodeSelector:
         cca-project-nodetype: "node-b-4core"

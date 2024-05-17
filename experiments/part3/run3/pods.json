@@ -8,15 +8,15 @@
                 "annotations": {
                     "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container parsec-blackscholes"
                 },
-                "creationTimestamp": "2024-05-07T10:51:42Z",
+                "creationTimestamp": "2024-05-12T13:20:28Z",
                 "generateName": "parsec-blackscholes-",
                 "labels": {
-                    "batch.kubernetes.io/controller-uid": "59daac5f-1297-4ebf-9851-8764f1871852",
+                    "batch.kubernetes.io/controller-uid": "d39857dd-f3e4-495b-a7b6-ce0ea4bb6c2c",
                     "batch.kubernetes.io/job-name": "parsec-blackscholes",
-                    "controller-uid": "59daac5f-1297-4ebf-9851-8764f1871852",
+                    "controller-uid": "d39857dd-f3e4-495b-a7b6-ce0ea4bb6c2c",
                     "job-name": "parsec-blackscholes"
                 },
-                "name": "parsec-blackscholes-zgxdq",
+                "name": "parsec-blackscholes-kd92z",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -25,18 +25,18 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-blackscholes",
-                        "uid": "59daac5f-1297-4ebf-9851-8764f1871852"
+                        "uid": "d39857dd-f3e4-495b-a7b6-ce0ea4bb6c2c"
                     }
                 ],
-                "resourceVersion": "10517",
-                "uid": "aea742e1-d81c-40be-ae5f-892c5aed76e8"
+                "resourceVersion": "68885",
+                "uid": "79ea6c49-36ee-4d3f-aefa-d8af2bf3258c"
             },
             "spec": {
                 "containers": [
                     {
                         "args": [
                             "-c",
-                            "taskset -c 1 ./run -a run -S parsec -p blackscholes -i simlarge -n 1"
+                            "taskset -c 6-7 ./run -a run -S parsec -p blackscholes -i native -n 2"
                         ],
                         "command": [
                             "/bin/sh"
@@ -54,7 +54,7 @@
                         "volumeMounts": [
                             {
                                 "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                                "name": "kube-api-access-htbxt",
+                                "name": "kube-api-access-4ch65",
                                 "readOnly": true
                             }
                         ]
@@ -62,7 +62,7 @@
                 ],
                 "dnsPolicy": "ClusterFirst",
                 "enableServiceLinks": true,
-                "nodeName": "node-c-8core-2d5t",
+                "nodeName": "node-c-8core-mzw7",
                 "nodeSelector": {
                     "cca-project-nodetype": "node-c-8core"
                 },
@@ -90,7 +90,7 @@
                 ],
                 "volumes": [
                     {
-                        "name": "kube-api-access-htbxt",
+                        "name": "kube-api-access-4ch65",
                         "projected": {
                             "defaultMode": 420,
                             "sources": [
@@ -133,35 +133,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:42Z",
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:46Z",
+                        "lastTransitionTime": "2024-05-12T13:22:59Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:46Z",
+                        "lastTransitionTime": "2024-05-12T13:22:59Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:42Z",
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "containerd://4e6c56ad0588fb8fdd6bdd1dfc9c5531e7e0f0ba09b618e4e6181e1a35ea1357",
+                        "containerID": "containerd://95a68f9f8de0b1d670a20cc22914bf4950c1153898224f2a8ae5a07d4bfc3ef6",
                         "image": "docker.io/anakli/cca:parsec_blackscholes",
                         "imageID": "docker.io/anakli/cca@sha256:7a46dab25dbb692c7c9eaa7a6bf5edeb220e3209b2460a18d05be40533849dc3",
                         "lastState": {},
@@ -171,25 +171,25 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "containerd://4e6c56ad0588fb8fdd6bdd1dfc9c5531e7e0f0ba09b618e4e6181e1a35ea1357",
+                                "containerID": "containerd://95a68f9f8de0b1d670a20cc22914bf4950c1153898224f2a8ae5a07d4bfc3ef6",
                                 "exitCode": 0,
-                                "finishedAt": "2024-05-07T10:51:45Z",
+                                "finishedAt": "2024-05-12T13:22:57Z",
                                 "reason": "Completed",
-                                "startedAt": "2024-05-07T10:51:44Z"
+                                "startedAt": "2024-05-12T13:20:29Z"
                             }
                         }
                     }
                 ],
-                "hostIP": "10.0.16.4",
+                "hostIP": "10.0.16.7",
                 "phase": "Succeeded",
-                "podIP": "100.96.6.69",
+                "podIP": "100.96.2.164",
                 "podIPs": [
                     {
-                        "ip": "100.96.6.69"
+                        "ip": "100.96.2.164"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2024-05-07T10:51:42Z"
+                "startTime": "2024-05-12T13:20:28Z"
             }
         },
         {
@@ -199,15 +199,15 @@
                 "annotations": {
                     "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container parsec-canneal"
                 },
-                "creationTimestamp": "2024-05-07T10:51:16Z",
+                "creationTimestamp": "2024-05-12T13:20:28Z",
                 "generateName": "parsec-canneal-",
                 "labels": {
-                    "batch.kubernetes.io/controller-uid": "b321c3de-b59d-43e8-9f83-dbf07ec3ff17",
+                    "batch.kubernetes.io/controller-uid": "3360c05d-5d27-439d-8a0c-31e5e9276a6b",
                     "batch.kubernetes.io/job-name": "parsec-canneal",
-                    "controller-uid": "b321c3de-b59d-43e8-9f83-dbf07ec3ff17",
+                    "controller-uid": "3360c05d-5d27-439d-8a0c-31e5e9276a6b",
                     "job-name": "parsec-canneal"
                 },
-                "name": "parsec-canneal-gwfrj",
+                "name": "parsec-canneal-mchkg",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -216,18 +216,18 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-canneal",
-                        "uid": "b321c3de-b59d-43e8-9f83-dbf07ec3ff17"
+                        "uid": "3360c05d-5d27-439d-8a0c-31e5e9276a6b"
                     }
                 ],
-                "resourceVersion": "10463",
-                "uid": "397e88f6-17c4-4fd6-97f8-e8d391532fff"
+                "resourceVersion": "68747",
+                "uid": "90a92bdd-45d9-4474-9169-953ba2d90804"
             },
             "spec": {
                 "containers": [
                     {
                         "args": [
                             "-c",
-                            "taskset -c 1-2 ./run -a run -S parsec -p canneal -i simlarge -n 1"
+                            "taskset -c 0-1 ./run -a run -S parsec -p canneal -i native -n 2"
                         ],
                         "command": [
                             "/bin/sh"
@@ -245,7 +245,7 @@
                         "volumeMounts": [
                             {
                                 "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                                "name": "kube-api-access-8j4d6",
+                                "name": "kube-api-access-gpgzh",
                                 "readOnly": true
                             }
                         ]
@@ -253,9 +253,9 @@
                 ],
                 "dnsPolicy": "ClusterFirst",
                 "enableServiceLinks": true,
-                "nodeName": "node-c-8core-2d5t",
+                "nodeName": "node-a-2core-0v3w",
                 "nodeSelector": {
-                    "cca-project-nodetype": "node-c-8core"
+                    "cca-project-nodetype": "node-a-2core"
                 },
                 "preemptionPolicy": "PreemptLowerPriority",
                 "priority": 0,
@@ -281,7 +281,7 @@
                 ],
                 "volumes": [
                     {
-                        "name": "kube-api-access-8j4d6",
+                        "name": "kube-api-access-gpgzh",
                         "projected": {
                             "defaultMode": 420,
                             "sources": [
@@ -324,35 +324,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:16Z",
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:37Z",
+                        "lastTransitionTime": "2024-05-12T13:22:26Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:37Z",
+                        "lastTransitionTime": "2024-05-12T13:22:26Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:16Z",
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "containerd://2f9a22b616e0bd2016fc172b5c654216ffce9a60b6b459f1da7260de7b5cb949",
+                        "containerID": "containerd://8cd3968edb17bf103b2bacefccac9c29ffc6d4963d76318f5137314929a856ce",
                         "image": "docker.io/anakli/cca:parsec_canneal",
                         "imageID": "docker.io/anakli/cca@sha256:cb8c3ea7a7071c7802b84179c36f52673ee099bbc2efd90149611285fec24367",
                         "lastState": {},
@@ -362,40 +362,40 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "containerd://2f9a22b616e0bd2016fc172b5c654216ffce9a60b6b459f1da7260de7b5cb949",
+                                "containerID": "containerd://8cd3968edb17bf103b2bacefccac9c29ffc6d4963d76318f5137314929a856ce",
                                 "exitCode": 0,
-                                "finishedAt": "2024-05-07T10:51:34Z",
+                                "finishedAt": "2024-05-12T13:22:25Z",
                                 "reason": "Completed",
-                                "startedAt": "2024-05-07T10:51:18Z"
+                                "startedAt": "2024-05-12T13:20:31Z"
                             }
                         }
                     }
                 ],
-                "hostIP": "10.0.16.4",
+                "hostIP": "10.0.16.6",
                 "phase": "Succeeded",
-                "podIP": "100.96.6.68",
+                "podIP": "100.96.4.72",
                 "podIPs": [
                     {
-                        "ip": "100.96.6.68"
+                        "ip": "100.96.4.72"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2024-05-07T10:51:16Z"
+                "startTime": "2024-05-12T13:20:28Z"
             }
         },
         {
             "apiVersion": "v1",
             "kind": "Pod",
             "metadata": {
-                "creationTimestamp": "2024-05-07T10:51:16Z",
+                "creationTimestamp": "2024-05-12T13:21:07Z",
                 "generateName": "parsec-dedup-",
                 "labels": {
-                    "batch.kubernetes.io/controller-uid": "62fc9314-4d0b-49d5-be9d-e9e5e254e9f9",
+                    "batch.kubernetes.io/controller-uid": "11a30fb4-d63b-4b05-abaa-de95d298f1ac",
                     "batch.kubernetes.io/job-name": "parsec-dedup",
-                    "controller-uid": "62fc9314-4d0b-49d5-be9d-e9e5e254e9f9",
+                    "controller-uid": "11a30fb4-d63b-4b05-abaa-de95d298f1ac",
                     "job-name": "parsec-dedup"
                 },
-                "name": "parsec-dedup-zvjsq",
+                "name": "parsec-dedup-k22vm",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -404,18 +404,18 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-dedup",
-                        "uid": "62fc9314-4d0b-49d5-be9d-e9e5e254e9f9"
+                        "uid": "11a30fb4-d63b-4b05-abaa-de95d298f1ac"
                     }
                 ],
-                "resourceVersion": "10466",
-                "uid": "9c37e043-b513-4009-a85a-4129593a2541"
+                "resourceVersion": "68574",
+                "uid": "65fe5a39-4c3f-494d-bfe7-172082892f22"
             },
             "spec": {
                 "containers": [
                     {
                         "args": [
                             "-c",
-                            "taskset -c 4-7 ./run -a run -S parsec -p dedup -i native -n 4"
+                            "taskset -c 2-3 ./run -a run -S parsec -p dedup -i native -n 2"
                         ],
                         "command": [
                             "/bin/sh"
@@ -424,9 +424,11 @@
                         "imagePullPolicy": "Always",
                         "name": "parsec-dedup",
                         "resources": {
+                            "limits": {
+                                "cpu": "2"
+                            },
                             "requests": {
-                                "cpu": "4",
-                                "memory": "8Gi"
+                                "cpu": "1"
                             }
                         },
                         "terminationMessagePath": "/dev/termination-log",
@@ -434,7 +436,7 @@
                         "volumeMounts": [
                             {
                                 "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                                "name": "kube-api-access-ssndr",
+                                "name": "kube-api-access-nbvqx",
                                 "readOnly": true
                             }
                         ]
@@ -442,7 +444,7 @@
                 ],
                 "dnsPolicy": "ClusterFirst",
                 "enableServiceLinks": true,
-                "nodeName": "node-c-8core-2d5t",
+                "nodeName": "node-c-8core-mzw7",
                 "nodeSelector": {
                     "cca-project-nodetype": "node-c-8core"
                 },
@@ -470,7 +472,7 @@
                 ],
                 "volumes": [
                     {
-                        "name": "kube-api-access-ssndr",
+                        "name": "kube-api-access-nbvqx",
                         "projected": {
                             "defaultMode": 420,
                             "sources": [
@@ -513,35 +515,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:16Z",
+                        "lastTransitionTime": "2024-05-12T13:21:07Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:38Z",
+                        "lastTransitionTime": "2024-05-12T13:21:42Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:38Z",
+                        "lastTransitionTime": "2024-05-12T13:21:42Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:16Z",
+                        "lastTransitionTime": "2024-05-12T13:21:07Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "containerd://7d77785fc02d0be94be05ef8ed024e3506e454504f9d79e73c8f3e66087905af",
+                        "containerID": "containerd://9a345d006e922ac4509c9b7279b4a9c80e935def9a3ad1f7a86200ea6015b08e",
                         "image": "docker.io/anakli/cca:parsec_dedup",
                         "imageID": "docker.io/anakli/cca@sha256:4bd64384b51253d5f69a5bb229055c6d114e4751b19036f29d8e75d84b53164d",
                         "lastState": {},
@@ -551,43 +553,40 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "containerd://7d77785fc02d0be94be05ef8ed024e3506e454504f9d79e73c8f3e66087905af",
+                                "containerID": "containerd://9a345d006e922ac4509c9b7279b4a9c80e935def9a3ad1f7a86200ea6015b08e",
                                 "exitCode": 0,
-                                "finishedAt": "2024-05-07T10:51:36Z",
+                                "finishedAt": "2024-05-12T13:21:36Z",
                                 "reason": "Completed",
-                                "startedAt": "2024-05-07T10:51:20Z"
+                                "startedAt": "2024-05-12T13:21:09Z"
                             }
                         }
                     }
                 ],
-                "hostIP": "10.0.16.4",
+                "hostIP": "10.0.16.7",
                 "phase": "Succeeded",
-                "podIP": "100.96.6.66",
+                "podIP": "100.96.2.167",
                 "podIPs": [
                     {
-                        "ip": "100.96.6.66"
+                        "ip": "100.96.2.167"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2024-05-07T10:51:16Z"
+                "startTime": "2024-05-12T13:21:07Z"
             }
         },
         {
             "apiVersion": "v1",
             "kind": "Pod",
             "metadata": {
-                "annotations": {
-                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container parsec-ferret"
-                },
-                "creationTimestamp": "2024-05-07T10:51:16Z",
+                "creationTimestamp": "2024-05-12T13:20:28Z",
                 "generateName": "parsec-ferret-",
                 "labels": {
-                    "batch.kubernetes.io/controller-uid": "17a89735-8ac0-4ddb-b30b-541a41a116be",
+                    "batch.kubernetes.io/controller-uid": "57f7117a-18b9-4bc0-8a2e-af6dfefa6d26",
                     "batch.kubernetes.io/job-name": "parsec-ferret",
-                    "controller-uid": "17a89735-8ac0-4ddb-b30b-541a41a116be",
+                    "controller-uid": "57f7117a-18b9-4bc0-8a2e-af6dfefa6d26",
                     "job-name": "parsec-ferret"
                 },
-                "name": "parsec-ferret-w29cn",
+                "name": "parsec-ferret-dqnz9",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -596,18 +595,18 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-ferret",
-                        "uid": "17a89735-8ac0-4ddb-b30b-541a41a116be"
+                        "uid": "57f7117a-18b9-4bc0-8a2e-af6dfefa6d26"
                     }
                 ],
-                "resourceVersion": "10479",
-                "uid": "c749d5f7-f5fa-4e6b-bd86-883b4be1c1ec"
+                "resourceVersion": "68805",
+                "uid": "4b724529-c374-44e8-96d1-854d3205385a"
             },
             "spec": {
                 "containers": [
                     {
                         "args": [
                             "-c",
-                            "taskset -c 0-1 ./run -a run -S parsec -p ferret -i simlarge -n 2"
+                            "taskset -c 1-7 ./run -a run -S parsec -p ferret -i native -n 7"
                         ],
                         "command": [
                             "/bin/sh"
@@ -617,7 +616,7 @@
                         "name": "parsec-ferret",
                         "resources": {
                             "requests": {
-                                "cpu": "100m"
+                                "cpu": "1"
                             }
                         },
                         "terminationMessagePath": "/dev/termination-log",
@@ -625,7 +624,7 @@
                         "volumeMounts": [
                             {
                                 "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                                "name": "kube-api-access-hjkpf",
+                                "name": "kube-api-access-nbrbr",
                                 "readOnly": true
                             }
                         ]
@@ -633,7 +632,7 @@
                 ],
                 "dnsPolicy": "ClusterFirst",
                 "enableServiceLinks": true,
-                "nodeName": "node-c-8core-2d5t",
+                "nodeName": "node-c-8core-mzw7",
                 "nodeSelector": {
                     "cca-project-nodetype": "node-c-8core"
                 },
@@ -661,7 +660,7 @@
                 ],
                 "volumes": [
                     {
-                        "name": "kube-api-access-hjkpf",
+                        "name": "kube-api-access-nbrbr",
                         "projected": {
                             "defaultMode": 420,
                             "sources": [
@@ -704,35 +703,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:16Z",
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:40Z",
+                        "lastTransitionTime": "2024-05-12T13:22:40Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:40Z",
+                        "lastTransitionTime": "2024-05-12T13:22:40Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:16Z",
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "containerd://9caa580be76d0a96e0908eaf5c57faaead5e3bcb8c64df75f18bb173ce7cce60",
+                        "containerID": "containerd://32f39a46b76bd20a4b3ebea943880bac4ca452fdcd6e7790bc18582a1acdaddd",
                         "image": "docker.io/anakli/cca:parsec_ferret",
                         "imageID": "docker.io/anakli/cca@sha256:3f14f111258188c28b3d2b7a7f3510220f99048148a083cd9fc6168daaea9e17",
                         "lastState": {},
@@ -742,43 +741,40 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "containerd://9caa580be76d0a96e0908eaf5c57faaead5e3bcb8c64df75f18bb173ce7cce60",
+                                "containerID": "containerd://32f39a46b76bd20a4b3ebea943880bac4ca452fdcd6e7790bc18582a1acdaddd",
                                 "exitCode": 0,
-                                "finishedAt": "2024-05-07T10:51:27Z",
+                                "finishedAt": "2024-05-12T13:22:39Z",
                                 "reason": "Completed",
-                                "startedAt": "2024-05-07T10:51:19Z"
+                                "startedAt": "2024-05-12T13:20:31Z"
                             }
                         }
                     }
                 ],
-                "hostIP": "10.0.16.4",
+                "hostIP": "10.0.16.7",
                 "phase": "Succeeded",
-                "podIP": "100.96.6.67",
+                "podIP": "100.96.2.166",
                 "podIPs": [
                     {
-                        "ip": "100.96.6.67"
+                        "ip": "100.96.2.166"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2024-05-07T10:51:16Z"
+                "startTime": "2024-05-12T13:20:28Z"
             }
         },
         {
             "apiVersion": "v1",
             "kind": "Pod",
             "metadata": {
-                "annotations": {
-                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container parsec-freqmine"
-                },
-                "creationTimestamp": "2024-05-07T10:51:16Z",
+                "creationTimestamp": "2024-05-12T13:20:25Z",
                 "generateName": "parsec-freqmine-",
                 "labels": {
-                    "batch.kubernetes.io/controller-uid": "9a1c808d-cdca-487c-a8c9-23d50791402f",
+                    "batch.kubernetes.io/controller-uid": "b7005012-0173-4d59-966f-f6014bbed9f0",
                     "batch.kubernetes.io/job-name": "parsec-freqmine",
-                    "controller-uid": "9a1c808d-cdca-487c-a8c9-23d50791402f",
+                    "controller-uid": "b7005012-0173-4d59-966f-f6014bbed9f0",
                     "job-name": "parsec-freqmine"
                 },
-                "name": "parsec-freqmine-ls4b8",
+                "name": "parsec-freqmine-h2crc",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -787,18 +783,18 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-freqmine",
-                        "uid": "9a1c808d-cdca-487c-a8c9-23d50791402f"
+                        "uid": "b7005012-0173-4d59-966f-f6014bbed9f0"
                     }
                 ],
-                "resourceVersion": "10462",
-                "uid": "07bb96b0-7d89-4ddc-b35c-ff29cf393fee"
+                "resourceVersion": "68895",
+                "uid": "8b3c1c64-be9c-4e9a-925c-c16f3fe709be"
             },
             "spec": {
                 "containers": [
                     {
                         "args": [
                             "-c",
-                            "taskset -c 4-7 ./run -a run -S parsec -p freqmine -i simlarge -n 2"
+                            "taskset -c 0-3 ./run -a run -S parsec -p freqmine -i native -n 4"
                         ],
                         "command": [
                             "/bin/sh"
@@ -808,196 +804,8 @@
                         "name": "parsec-freqmine",
                         "resources": {
                             "requests": {
-                                "cpu": "100m"
-                            }
-                        },
-                        "terminationMessagePath": "/dev/termination-log",
-                        "terminationMessagePolicy": "File",
-                        "volumeMounts": [
-                            {
-                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                                "name": "kube-api-access-rc9tv",
-                                "readOnly": true
-                            }
-                        ]
-                    }
-                ],
-                "dnsPolicy": "ClusterFirst",
-                "enableServiceLinks": true,
-                "nodeName": "node-c-8core-2d5t",
-                "nodeSelector": {
-                    "cca-project-nodetype": "node-c-8core"
-                },
-                "preemptionPolicy": "PreemptLowerPriority",
-                "priority": 0,
-                "restartPolicy": "Never",
-                "schedulerName": "default-scheduler",
-                "securityContext": {},
-                "serviceAccount": "default",
-                "serviceAccountName": "default",
-                "terminationGracePeriodSeconds": 30,
-                "tolerations": [
-                    {
-                        "effect": "NoExecute",
-                        "key": "node.kubernetes.io/not-ready",
-                        "operator": "Exists",
-                        "tolerationSeconds": 300
-                    },
-                    {
-                        "effect": "NoExecute",
-                        "key": "node.kubernetes.io/unreachable",
-                        "operator": "Exists",
-                        "tolerationSeconds": 300
-                    }
-                ],
-                "volumes": [
-                    {
-                        "name": "kube-api-access-rc9tv",
-                        "projected": {
-                            "defaultMode": 420,
-                            "sources": [
-                                {
-                                    "serviceAccountToken": {
-                                        "expirationSeconds": 3607,
-                                        "path": "token"
-                                    }
-                                },
-                                {
-                                    "configMap": {
-                                        "items": [
-                                            {
-                                                "key": "ca.crt",
-                                                "path": "ca.crt"
-                                            }
-                                        ],
-                                        "name": "kube-root-ca.crt"
-                                    }
-                                },
-                                {
-                                    "downwardAPI": {
-                                        "items": [
-                                            {
-                                                "fieldRef": {
-                                                    "apiVersion": "v1",
-                                                    "fieldPath": "metadata.namespace"
-                                                },
-                                                "path": "namespace"
-                                            }
-                                        ]
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                ]
-            },
-            "status": {
-                "conditions": [
-                    {
-                        "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:16Z",
-                        "reason": "PodCompleted",
-                        "status": "True",
-                        "type": "Initialized"
-                    },
-                    {
-                        "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:38Z",
-                        "reason": "PodCompleted",
-                        "status": "False",
-                        "type": "Ready"
-                    },
-                    {
-                        "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:38Z",
-                        "reason": "PodCompleted",
-                        "status": "False",
-                        "type": "ContainersReady"
-                    },
-                    {
-                        "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:16Z",
-                        "status": "True",
-                        "type": "PodScheduled"
-                    }
-                ],
-                "containerStatuses": [
-                    {
-                        "containerID": "containerd://0f7ebeb3c489a862c5e919954d5d66d85423bd89b97280b2187a25a9b45b4ca0",
-                        "image": "docker.io/anakli/cca:parsec_freqmine",
-                        "imageID": "docker.io/anakli/cca@sha256:c2a2f85fe345a655e84a629f04a1ca30482b9c0dd658bed193ed1d70a6395e5a",
-                        "lastState": {},
-                        "name": "parsec-freqmine",
-                        "ready": false,
-                        "restartCount": 0,
-                        "started": false,
-                        "state": {
-                            "terminated": {
-                                "containerID": "containerd://0f7ebeb3c489a862c5e919954d5d66d85423bd89b97280b2187a25a9b45b4ca0",
-                                "exitCode": 0,
-                                "finishedAt": "2024-05-07T10:51:25Z",
-                                "reason": "Completed",
-                                "startedAt": "2024-05-07T10:51:17Z"
-                            }
-                        }
-                    }
-                ],
-                "hostIP": "10.0.16.4",
-                "phase": "Succeeded",
-                "podIP": "100.96.6.65",
-                "podIPs": [
-                    {
-                        "ip": "100.96.6.65"
-                    }
-                ],
-                "qosClass": "Burstable",
-                "startTime": "2024-05-07T10:51:16Z"
-            }
-        },
-        {
-            "apiVersion": "v1",
-            "kind": "Pod",
-            "metadata": {
-                "creationTimestamp": "2024-05-07T10:51:13Z",
-                "generateName": "parsec-radix-",
-                "labels": {
-                    "batch.kubernetes.io/controller-uid": "d33f2e9c-7261-4a8c-a5e6-09b5c54a80db",
-                    "batch.kubernetes.io/job-name": "parsec-radix",
-                    "controller-uid": "d33f2e9c-7261-4a8c-a5e6-09b5c54a80db",
-                    "job-name": "parsec-radix"
-                },
-                "name": "parsec-radix-9rl2r",
-                "namespace": "default",
-                "ownerReferences": [
-                    {
-                        "apiVersion": "batch/v1",
-                        "blockOwnerDeletion": true,
-                        "controller": true,
-                        "kind": "Job",
-                        "name": "parsec-radix",
-                        "uid": "d33f2e9c-7261-4a8c-a5e6-09b5c54a80db"
-                    }
-                ],
-                "resourceVersion": "10498",
-                "uid": "c2ef5bb6-1f2c-4503-b313-dbb704ec3a05"
-            },
-            "spec": {
-                "containers": [
-                    {
-                        "args": [
-                            "-c",
-                            "taskset -c 0-3 ./run -a run -S splash2x -p radix -i native -n 8"
-                        ],
-                        "command": [
-                            "/bin/sh"
-                        ],
-                        "image": "anakli/cca:splash2x_radix",
-                        "imagePullPolicy": "Always",
-                        "name": "parsec-radix",
-                        "resources": {
-                            "requests": {
                                 "cpu": "2",
-                                "memory": "4Gi"
+                                "memory": "8Gi"
                             }
                         },
                         "terminationMessagePath": "/dev/termination-log",
@@ -1005,7 +813,7 @@
                         "volumeMounts": [
                             {
                                 "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                                "name": "kube-api-access-t748x",
+                                "name": "kube-api-access-t7l7x",
                                 "readOnly": true
                             }
                         ]
@@ -1013,7 +821,7 @@
                 ],
                 "dnsPolicy": "ClusterFirst",
                 "enableServiceLinks": true,
-                "nodeName": "node-b-4core-wsvc",
+                "nodeName": "node-b-4core-r8h5",
                 "nodeSelector": {
                     "cca-project-nodetype": "node-b-4core"
                 },
@@ -1041,7 +849,7 @@
                 ],
                 "volumes": [
                     {
-                        "name": "kube-api-access-t748x",
+                        "name": "kube-api-access-t7l7x",
                         "projected": {
                             "defaultMode": 420,
                             "sources": [
@@ -1084,35 +892,227 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:13Z",
+                        "lastTransitionTime": "2024-05-12T13:20:25Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:39Z",
+                        "lastTransitionTime": "2024-05-12T13:23:00Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:39Z",
+                        "lastTransitionTime": "2024-05-12T13:23:00Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:13Z",
+                        "lastTransitionTime": "2024-05-12T13:20:25Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "containerd://991a9b698bd193bbcbf5227fc2dfef9988a45f8940b19d92fe89d25e5a68efbb",
+                        "containerID": "containerd://ee9e20ab4f0be1d64be3cbd98273d4735c8705f757eb2133622fc76ea5df23a8",
+                        "image": "docker.io/anakli/cca:parsec_freqmine",
+                        "imageID": "docker.io/anakli/cca@sha256:c2a2f85fe345a655e84a629f04a1ca30482b9c0dd658bed193ed1d70a6395e5a",
+                        "lastState": {},
+                        "name": "parsec-freqmine",
+                        "ready": false,
+                        "restartCount": 0,
+                        "started": false,
+                        "state": {
+                            "terminated": {
+                                "containerID": "containerd://ee9e20ab4f0be1d64be3cbd98273d4735c8705f757eb2133622fc76ea5df23a8",
+                                "exitCode": 0,
+                                "finishedAt": "2024-05-12T13:23:00Z",
+                                "reason": "Completed",
+                                "startedAt": "2024-05-12T13:20:26Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.0.16.2",
+                "phase": "Succeeded",
+                "podIP": "100.96.3.246",
+                "podIPs": [
+                    {
+                        "ip": "100.96.3.246"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "startTime": "2024-05-12T13:20:25Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "creationTimestamp": "2024-05-12T13:20:28Z",
+                "generateName": "parsec-radix-",
+                "labels": {
+                    "batch.kubernetes.io/controller-uid": "dc78a0c5-b55f-4bb5-91f2-ee158437bc63",
+                    "batch.kubernetes.io/job-name": "parsec-radix",
+                    "controller-uid": "dc78a0c5-b55f-4bb5-91f2-ee158437bc63",
+                    "job-name": "parsec-radix"
+                },
+                "name": "parsec-radix-zxj74",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "parsec-radix",
+                        "uid": "dc78a0c5-b55f-4bb5-91f2-ee158437bc63"
+                    }
+                ],
+                "resourceVersion": "68419",
+                "uid": "4f64f47b-45ba-44cb-8f8c-193d5c324c6c"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "args": [
+                            "-c",
+                            "taskset -c 2-3 ./run -a run -S splash2x -p radix -i native -n 2"
+                        ],
+                        "command": [
+                            "/bin/sh"
+                        ],
+                        "image": "anakli/cca:splash2x_radix",
+                        "imagePullPolicy": "Always",
+                        "name": "parsec-radix",
+                        "resources": {
+                            "limits": {
+                                "cpu": "2"
+                            },
+                            "requests": {
+                                "cpu": "2",
+                                "memory": "2Gi"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-nvpc6",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "node-c-8core-mzw7",
+                "nodeSelector": {
+                    "cca-project-nodetype": "node-c-8core"
+                },
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Never",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "kube-api-access-nvpc6",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "serviceAccountToken": {
+                                        "expirationSeconds": 3607,
+                                        "path": "token"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "ca.crt",
+                                                "path": "ca.crt"
+                                            }
+                                        ],
+                                        "name": "kube-root-ca.crt"
+                                    }
+                                },
+                                {
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.namespace"
+                                                },
+                                                "path": "namespace"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
+                        "reason": "PodCompleted",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2024-05-12T13:21:04Z",
+                        "reason": "PodCompleted",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2024-05-12T13:21:04Z",
+                        "reason": "PodCompleted",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "containerd://2ce8d8b22e2d37e7103bdb76dcd88e503efc9c66b607e240fd72332b3b0a0a00",
                         "image": "docker.io/anakli/cca:splash2x_radix",
                         "imageID": "docker.io/anakli/cca@sha256:dbf0e10e749cf6544504ec0c90a206b8fcdc7fced6c23df536f5857f3f0ed319",
                         "lastState": {},
@@ -1122,43 +1122,40 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "containerd://991a9b698bd193bbcbf5227fc2dfef9988a45f8940b19d92fe89d25e5a68efbb",
+                                "containerID": "containerd://2ce8d8b22e2d37e7103bdb76dcd88e503efc9c66b607e240fd72332b3b0a0a00",
                                 "exitCode": 0,
-                                "finishedAt": "2024-05-07T10:51:25Z",
+                                "finishedAt": "2024-05-12T13:21:03Z",
                                 "reason": "Completed",
-                                "startedAt": "2024-05-07T10:51:15Z"
+                                "startedAt": "2024-05-12T13:20:30Z"
                             }
                         }
                     }
                 ],
-                "hostIP": "10.0.16.2",
+                "hostIP": "10.0.16.7",
                 "phase": "Succeeded",
-                "podIP": "100.96.1.36",
+                "podIP": "100.96.2.165",
                 "podIPs": [
                     {
-                        "ip": "100.96.1.36"
+                        "ip": "100.96.2.165"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2024-05-07T10:51:13Z"
+                "startTime": "2024-05-12T13:20:28Z"
             }
         },
         {
             "apiVersion": "v1",
             "kind": "Pod",
             "metadata": {
-                "annotations": {
-                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container parsec-vips"
-                },
-                "creationTimestamp": "2024-05-07T10:51:14Z",
+                "creationTimestamp": "2024-05-12T13:20:28Z",
                 "generateName": "parsec-vips-",
                 "labels": {
-                    "batch.kubernetes.io/controller-uid": "731a5002-38be-451d-bdba-44284ce26447",
+                    "batch.kubernetes.io/controller-uid": "7122760d-bcc1-425d-b05b-41608c34437c",
                     "batch.kubernetes.io/job-name": "parsec-vips",
-                    "controller-uid": "731a5002-38be-451d-bdba-44284ce26447",
+                    "controller-uid": "7122760d-bcc1-425d-b05b-41608c34437c",
                     "job-name": "parsec-vips"
                 },
-                "name": "parsec-vips-r9n4d",
+                "name": "parsec-vips-lmdtt",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -1167,11 +1164,11 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-vips",
-                        "uid": "731a5002-38be-451d-bdba-44284ce26447"
+                        "uid": "7122760d-bcc1-425d-b05b-41608c34437c"
                     }
                 ],
-                "resourceVersion": "10561",
-                "uid": "5eac6b5e-ab31-432d-b267-ee480e3dc707"
+                "resourceVersion": "68625",
+                "uid": "b3e6ffb2-9bfa-455f-ac89-c286faf7a4f7"
             },
             "spec": {
                 "containers": [
@@ -1188,7 +1185,8 @@
                         "name": "parsec-vips",
                         "resources": {
                             "requests": {
-                                "cpu": "100m"
+                                "cpu": "1",
+                                "memory": "8Gi"
                             }
                         },
                         "terminationMessagePath": "/dev/termination-log",
@@ -1196,7 +1194,7 @@
                         "volumeMounts": [
                             {
                                 "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                                "name": "kube-api-access-5vl4c",
+                                "name": "kube-api-access-rxj26",
                                 "readOnly": true
                             }
                         ]
@@ -1204,7 +1202,7 @@
                 ],
                 "dnsPolicy": "ClusterFirst",
                 "enableServiceLinks": true,
-                "nodeName": "node-b-4core-wsvc",
+                "nodeName": "node-b-4core-r8h5",
                 "nodeSelector": {
                     "cca-project-nodetype": "node-b-4core"
                 },
@@ -1232,7 +1230,7 @@
                 ],
                 "volumes": [
                     {
-                        "name": "kube-api-access-5vl4c",
+                        "name": "kube-api-access-rxj26",
                         "projected": {
                             "defaultMode": 420,
                             "sources": [
@@ -1275,35 +1273,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:14Z",
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:55Z",
+                        "lastTransitionTime": "2024-05-12T13:21:54Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:55Z",
+                        "lastTransitionTime": "2024-05-12T13:21:54Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:51:14Z",
+                        "lastTransitionTime": "2024-05-12T13:20:28Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "containerd://3aa1fc541da257f73e8f4f668ddb88b385f0b68d6428f807041f9a28c1eb0279",
+                        "containerID": "containerd://548f73de348c912973796eab668e6f704db1550ccee94214dddf948ffeeca80c",
                         "image": "docker.io/anakli/cca:parsec_vips",
                         "imageID": "docker.io/anakli/cca@sha256:5c719838bc3d4d72143f27ca60bb5fe6f5f5b60be53b3972e73350596aa03547",
                         "lastState": {},
@@ -1313,49 +1311,46 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "containerd://3aa1fc541da257f73e8f4f668ddb88b385f0b68d6428f807041f9a28c1eb0279",
+                                "containerID": "containerd://548f73de348c912973796eab668e6f704db1550ccee94214dddf948ffeeca80c",
                                 "exitCode": 0,
-                                "finishedAt": "2024-05-07T10:51:52Z",
+                                "finishedAt": "2024-05-12T13:21:54Z",
                                 "reason": "Completed",
-                                "startedAt": "2024-05-07T10:51:15Z"
+                                "startedAt": "2024-05-12T13:20:29Z"
                             }
                         }
                     }
                 ],
                 "hostIP": "10.0.16.2",
                 "phase": "Succeeded",
-                "podIP": "100.96.1.37",
+                "podIP": "100.96.3.247",
                 "podIPs": [
                     {
-                        "ip": "100.96.1.37"
+                        "ip": "100.96.3.247"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2024-05-07T10:51:14Z"
+                "startTime": "2024-05-12T13:20:28Z"
             }
         },
         {
             "apiVersion": "v1",
             "kind": "Pod",
             "metadata": {
-                "annotations": {
-                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container memcached"
-                },
-                "creationTimestamp": "2024-05-07T10:34:17Z",
+                "creationTimestamp": "2024-05-12T12:56:24Z",
                 "labels": {
                     "name": "some-memcached"
                 },
                 "name": "some-memcached",
                 "namespace": "default",
-                "resourceVersion": "5256",
-                "uid": "def2b100-df62-40e0-8dfd-74e711d4dd2d"
+                "resourceVersion": "62013",
+                "uid": "44e4b27b-43d9-4686-a7d2-46a75e29eb46"
             },
             "spec": {
                 "containers": [
                     {
                         "args": [
                             "-c",
-                            "taskset -c 0-1 ./memcached -t 2 -u memcache"
+                            "taskset -c 0 ./memcached -t 1 -u memcache"
                         ],
                         "command": [
                             "/bin/sh"
@@ -1365,7 +1360,7 @@
                         "name": "memcached",
                         "resources": {
                             "requests": {
-                                "cpu": "100m"
+                                "cpu": "1"
                             }
                         },
                         "terminationMessagePath": "/dev/termination-log",
@@ -1373,7 +1368,7 @@
                         "volumeMounts": [
                             {
                                 "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                                "name": "kube-api-access-xp4t8",
+                                "name": "kube-api-access-4q9r4",
                                 "readOnly": true
                             }
                         ]
@@ -1381,9 +1376,9 @@
                 ],
                 "dnsPolicy": "ClusterFirst",
                 "enableServiceLinks": true,
-                "nodeName": "node-a-2core-7jsf",
+                "nodeName": "node-c-8core-mzw7",
                 "nodeSelector": {
-                    "cca-project-nodetype": "node-a-2core"
+                    "cca-project-nodetype": "node-c-8core"
                 },
                 "preemptionPolicy": "PreemptLowerPriority",
                 "priority": 0,
@@ -1409,7 +1404,7 @@
                 ],
                 "volumes": [
                     {
-                        "name": "kube-api-access-xp4t8",
+                        "name": "kube-api-access-4q9r4",
                         "projected": {
                             "defaultMode": 420,
                             "sources": [
@@ -1452,32 +1447,32 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:34:17Z",
+                        "lastTransitionTime": "2024-05-12T12:56:24Z",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:34:20Z",
+                        "lastTransitionTime": "2024-05-12T12:56:27Z",
                         "status": "True",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:34:20Z",
+                        "lastTransitionTime": "2024-05-12T12:56:27Z",
                         "status": "True",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2024-05-07T10:34:17Z",
+                        "lastTransitionTime": "2024-05-12T12:56:24Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "containerd://a1689530565ce014b4ba340c93b6b90511a683acfb38389bf828b9fbe680becb",
+                        "containerID": "containerd://7ded47455a82eb2eec119f7a850b0bf7f1190c24d74456bc5bf5ea4f3a9f5066",
                         "image": "docker.io/anakli/memcached:t1",
                         "imageID": "sha256:5366d8d9fe88b4f31f0f2a8e5b3a14db60afab3c6c5ee3d58be293c1fb232804",
                         "lastState": {},
@@ -1487,21 +1482,21 @@
                         "started": true,
                         "state": {
                             "running": {
-                                "startedAt": "2024-05-07T10:34:20Z"
+                                "startedAt": "2024-05-12T12:56:26Z"
                             }
                         }
                     }
                 ],
-                "hostIP": "10.0.16.5",
+                "hostIP": "10.0.16.7",
                 "phase": "Running",
-                "podIP": "100.96.2.5",
+                "podIP": "100.96.2.133",
                 "podIPs": [
                     {
-                        "ip": "100.96.2.5"
+                        "ip": "100.96.2.133"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2024-05-07T10:34:17Z"
+                "startTime": "2024-05-12T12:56:24Z"
             }
         }
     ],

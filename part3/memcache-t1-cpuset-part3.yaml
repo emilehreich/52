@@ -10,8 +10,11 @@ spec:
       name: memcached
       imagePullPolicy: Always
       command: ["/bin/sh"]
-      args: ["-c", "taskset -c 0-1 ./memcached -t 2 -u memcache"]
+      args: ["-c", "taskset -c 0 ./memcached -t 1 -u memcache"]
+      resources:
+          requests:
+            cpu: "1"              # number of cores
   nodeSelector:
-    cca-project-nodetype: "node-a-2core"
+    cca-project-nodetype: "node-c-8core"
 
 
