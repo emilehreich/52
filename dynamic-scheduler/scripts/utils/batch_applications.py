@@ -1,37 +1,49 @@
 from enum import Enum
 
 class BatchApplication(Enum):
-    DEDUP = ("0,1,2,3",
+
+
+    DEDUP = ["2",
          "dedup",
          "anakli/cca:parsec_dedup",
-         "./run -a run -S parsec -p dedup -i native -n 1")
+         "./run -a run -S parsec -p dedup -i native -n 1", "1"]
     
-    BLACKSHOLES = ("0,1,2,3",
+    BLACKSHOLES = ["3",
                 "blackscholes",
                 "anakli/cca:parsec_blackscholes",
-                "./run -a run -S parsec -p blackscholes -i native -n 2")
+                "./run -a run -S parsec -p blackscholes -i native -n 1", "1"]
     
-    CANNEAL = ("0,1,2,3",
+    CANNEAL = ["1,2,3",
            "canneal",
            "anakli/cca:parsec_canneal",
-           "./run -a run -S parsec -p canneal -i native -n 2")
+           "./run -a run -S parsec -p canneal -i native -n 3", "3"]
     
-    FREQMINE = ("0,1,2,3",
+    FREQMINE = ["1,2,3",
             "freqmine",
             "anakli/cca:parsec_freqmine",
-            "./run -a run -S parsec -p freqmine -i native -n 2")
+            "./run -a run -S parsec -p freqmine -i native -n 3", "3"]
     
-    FERRET = ("0,1,2,3",
+    FERRET = ["2,3",
           "ferret",
           "anakli/cca:parsec_ferret",
-          "./run -a run -S parsec -p ferret -i native -n 3")
+          "./run -a run -S parsec -p ferret -i native -n 2", "2"]
     
-    VIPS = ("0,1,2,3",
+    VIPS = ["2,3",
         "vips",
         "anakli/cca:parsec_vips",
-        "./run -a run -S parsec -p vips -i native -n 2")
+        "./run -a run -S parsec -p vips -i native -n 2", "2"]
     
-    RADIX = ("0,1,2,3",
+    RADIX = ["2,3",
             "radix",
-            "anakli/cca:parsec_radix",
-            "./run -a run -S parsec -p radix -i native -n 2")
+            "anakli/cca:splash2x_radix",
+            "./run -a run -S splash2x -p radix -i native -n 2", "2"]
+    
+    def get_job(name):
+        for job in BatchApplication:
+            if job.value[1] == name:
+                return job
+        return None
+    
+    def set_cpu_set(self, cpu_set):
+        self.value[0] = cpu_set
+        return self

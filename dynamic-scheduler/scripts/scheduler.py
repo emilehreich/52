@@ -1,37 +1,64 @@
-import docker
 import utils.scheduler_logger as log
+import utils.batch_applications as batch
 
 from docker.models.containers import Container
 
 
 class Scheduler:
     def __init__(self, queues : list):
-        self.__client = docker.from_env()
-        self.__containers = []
+
+        self.__completed = []
         self.__logger = log.SchedulerLogger()
+        self.__mode = 0 
 
-        # initial schedule
-        # TODO: run containers with initial configuration
+        self.__q1 = iter(queues[0])
+        self.__q2 = iter(queues[1])
+        self.__q3 = iter(queues[2])
 
-    def create(self, container_config):
-        """
-            Create a new container
-        """
-        container = self.__client.containers.create(cpuset_cpus=container_config[0],
-                                               name=container_config[1],
-                                               detach=True,
-                                               auto_remove=False,
-                                               image=container_config[2],
-                                               command=container_config[3])
-        self.__containers.append(container)
+        self.__running_q1 = []
+        self.__running_q2 = []
+        self.__running_q3 = []
+        
+        self.__available_cpus = 4
+        self.__cpus = [0,1,1,1]
 
-    def update(self, container : Container, cpu: int):
+    def set_mode(self, mode):
+        self.__mode = mode
+        if mode == 1:
+            self.__logger.update_cores(log.Job.MEMCACHED, "0,1")
+            self.__available_cpus = 2
+            self.__cpus = [0,0,1,1]
+        elif mode == 0:
+            self.__logger.update_cores(log.Job.MEMCACHED, "0")
+            self.__available_cpus = 4
+            self.__cpus = [0,1,1,1]
+
+        for container in self.__running_q1:
+            #self.pause(container)
+            if mode == 1:
+                self.update(container, "2,3")
+                batch.BatchApplication.get_job(container.name).set_cpu_set("2,3")
+            else:
+                self.update(container, "1,2,3")
+                batch.BatchApplication.get_job(container.name).set_cpu_set("1,2,3")
+            self.pause(container)
+        for container in self.__running_q2:
+            self.pause(container)
+        for container in self.__running_q3:
+            self.pause(container)
+
+            
+
+    def update(self, container : Container, cpuset: str):
         """
             Update a container
         """
         if container is None:
             return
-        container.update(cpuset_cpus=cpu)
+        container.reload()
+        if container.status == "running":
+            self.__logger.update_cores(log.Job.get_Job(container.name), cpuset)
+        container.update(cpuset_cpus=cpuset)
 
     def remove(self, container : Container):
         """
@@ -39,16 +66,19 @@ class Scheduler:
         """
         if container is None:
             return
+        self.__logger.job_end(log.Job.get_Job(container.name))
         container.remove()
         
-
     def pause(self, container : Container):
         """
             Pause a container
         """
         if container is None:
             return
-        container.pause()
+        container.reload()
+        if container.status == "running":
+            self.__logger.job_pause(log.Job.get_Job(container.name))
+            container.pause()
 
     def startOrResume(self, container : Container):
         """
@@ -60,41 +90,114 @@ class Scheduler:
         container.reload()
 
         if container.status == "paused":
-            self.__logger.job_unpause(container.name)
+            self.__logger.job_unpause(log.Job.get_Job(container.name))
             container.unpause()
         elif container.status == "created":
-            self.__logger.job_start(container.name)
+            print("start : ", container.name )
+            job: batch.BatchApplication = batch.BatchApplication.get_job(container.name)
+            self.__logger.job_start(log.Job.get_Job(container.name),
+                                job.value[0].split(","),
+                                job.value[4]
+                                )
             container.start()
         else:
             return
         
-    def next(self):
-        """
-            Schedule the next container to run
-        """
-        # TODO: implement scheduling policy
-        """
-            Notes from Parts 1-2:
 
-            Workload      | none cpu  l1d  l1i  l2   llc  memBW
-            --------------|------------------------------------
-            blackscholes  | 1.00 1.29 1.34 1.54 1.34 1.48 1.31
-            canneal       | 1.00 1.23 1.38 1.46 1.30 1.92 1.39
-            dedup         | 1.00 1.73 1.28 2.03 1.24 1.98 1.60
-            ferret        | 1.00 1.93 1.27 2.31 1.38 2.47 1.97
-            freqmine      | 1.00 1.99 1.04 2.04 1.03 1.77 1.58
-            radix         | 1.00 1.06 1.11 1.11 1.12 1.52 1.12
-            vips          | 1.00 1.73 1.71 1.88 1.68 1.89 1.68
-
-            Parallelization Speedup (threads)
-            Workload      | 1       2       4
-            --------------|------------------------------------
-            dedup         | 1.00    1.74    2.12
-            blackscholes  | 1.00    1.70    2.63 
-            canneal       | 1.00    1.63    2.43 
-            ferret        | 1.00    1.94    2.82 
-            freqmine      | 1.00    1.97    3.85 
-            radix         | 1.00    2.07    3.96
-            vips          | 1.00    1.37    3.28 
+    def next(self, adjust_resources: bool = False):
         """
-        pass
+        Schedule the next container to run
+        """
+        if self.__mode == 0:
+            
+            # multiprocessor queues
+            self.handle_mp_queue(self.__q1, self.__running_q1, 3, adjust_resources)
+
+            self.handle_mp_queue(self.__q2, self.__running_q2, 2, adjust_resources)
+
+            # single processor queue
+            if self.__available_cpus >= 1:
+                self.handle_sp_queue()
+                        
+        elif self.__mode == 1:
+            # Low Level of Resource Availability
+            self.handle_mp_queue(self.__q2, self.__running_q2, 2, adjust_resources)
+            if self.__available_cpus >= 1:
+                self.handle_sp_queue()
+
+            self.handle_mp_queue(self.__q1, self.__running_q1, 2, adjust_resources)
+        
+        if len(self.__completed) == 7:
+            return True
+        return False
+
+
+    def handle_sp_queue(self):
+        """
+            Handle the single processor queue
+        """
+        for c in self.__running_q3:
+            if self.__available_cpus >= 1:
+                self.startOrResume(c)
+                self.__available_cpus -= 1
+        if self.__available_cpus >= 1:
+            c: Container = next(self.__q3, None)
+            if c is not None:
+                for i in range(0,4):
+                    if self.__cpus[i] == 1:
+                        self.update(c, str(i))
+                        batch.BatchApplication.get_job(c.name).set_cpu_set(str(i))
+                        self.__cpus[i] = c.name
+
+
+                self.startOrResume(c)
+                self.__running_q3.append(c)
+                self.__available_cpus -= 1
+    
+        self.check_and_handle_exited(self.__running_q3, 1)
+
+
+    def handle_mp_queue(self, queue, running_queue, n_cpu, adjust_resources):
+        """
+            Handle a queue of containers running on multiprocessor
+        """
+        for c in running_queue:
+            if self.__available_cpus >= n_cpu:
+                self.startOrResume(c)
+                self.__available_cpus -= n_cpu
+        if self.__available_cpus >= n_cpu: 
+            self.process_new_container(queue, running_queue, n_cpu, adjust_resources)
+                
+        self.check_and_handle_exited(running_queue, n_cpu)
+        
+
+    def adjust_resources(self, c, n_cpu):
+        if n_cpu == 3:
+            cpuset = "1,2,3"
+        elif n_cpu == 2:
+            cpuset = "2,3"
+        
+        self.update(c, cpuset)
+
+    def process_new_container(self, queue, running_queue: list, n_cpu, adjust_resources):
+        c = next(queue, None)
+        if c is not None:
+            #if adjust_resources:
+            #    self.adjust_resources(c, n_cpu)
+            self.adjust_resources(c, n_cpu)
+            self.startOrResume(c)
+            running_queue.append(c)
+            self.__available_cpus -= n_cpu
+
+
+    def check_and_handle_exited(self, running_queue: list[Container], n_cpu):
+        for container in running_queue:
+            container.reload()
+            if container.status == "exited":
+                for c in range(1,4):
+                    if self.__cpus[c] == container.name:
+                        self.__cpus[c] = 1
+                running_queue.remove(container)
+                self.remove(container)
+                self.__completed.append(container)
+                self.__available_cpus += n_cpu

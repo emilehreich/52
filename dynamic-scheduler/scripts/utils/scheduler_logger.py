@@ -16,6 +16,12 @@ class Job(Enum):
     RADIX = "radix"
     VIPS = "vips"
 
+    def get_Job(name):
+        for job in Job:
+            if job.value == name:
+                return job
+        return None
+
 
 class SchedulerLogger:
     def __init__(self):
@@ -39,10 +45,10 @@ class SchedulerLogger:
 
         self._log("end", job)
 
-    def update_cores(self, job: Job, cores: list[str]) -> None:
+    def update_cores(self, job: Job, cores: str) -> None:
         assert job != Job.SCHEDULER, "You don't have to log SCHEDULER here"
 
-        self._log("update_cores", job, "["+(",".join(str(i) for i in cores))+"]")
+        self._log("update_cores", job, "["+cores+"]")
 
     def job_pause(self, job: Job) -> None:
         assert job != Job.SCHEDULER, "You don't have to log SCHEDULER here"
