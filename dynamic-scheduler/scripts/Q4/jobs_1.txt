@@ -1,5 +1,8 @@
 2024-05-15T12:25:06.269562 start scheduler
 2024-05-15T12:25:06.294555 start memcached [0] 2
+2024-05-15T12:25:06.294789 update_cores memcached [0,1]
+2024-05-15T12:25:06.324504 start radix [2,3] 2
+2024-05-15T12:25:35.027540 end radix
 2024-05-15T12:25:35.048635 start blackscholes [3] 1
 2024-05-15T12:25:39.301071 update_cores memcached [0]
 2024-05-15T12:25:39.303745 pause blackscholes
